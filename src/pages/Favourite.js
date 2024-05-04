@@ -1,16 +1,12 @@
-import React from 'react'
-import Navbar from '../shared/Navbar'
-import Wishlist from '../components/wishlist/Wishlist'
-import Footer from '../shared/Footer'
+import React from "react";
+import Wishlist from "../components/wishlist/Wishlist";
 
 const Favourite = () => {
   return (
     <div>
-      <Navbar/>
-      <Wishlist/>
-      <Footer/>
+      <Wishlist />
     </div>
-  )
-}
+  );
+};
 
-export default Favourite
+export default Favourite;

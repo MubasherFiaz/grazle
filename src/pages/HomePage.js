@@ -1,16 +1,12 @@
-import React from 'react'
-import Navbar from '../shared/Navbar'
-import Footer from '../shared/Footer'
-import HomeBody from '../components/Home/HomeBody'
+import React from "react";
+import HomeBody from "../components/Home/HomeBody";
 
 const HomePage = () => {
   return (
     <div>
-      <Navbar/>
-      <HomeBody/>
-      <Footer/>
+      <HomeBody />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

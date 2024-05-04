@@ -1,16 +1,12 @@
-import React from 'react'
-import Navbar from '../shared/Navbar'
-import Footer from '../shared/Footer'
-import CartComponent from '../components/cart/CartComponent'
+import React from "react";
+import CartComponent from "../components/cart/CartComponent";
 
 const Cart = () => {
   return (
     <div>
-    <Navbar/>
-      <CartComponent/>
-      <Footer/>
+      <CartComponent />
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
