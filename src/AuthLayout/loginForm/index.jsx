@@ -13,7 +13,7 @@ const Login = () => {
       <h1 className="fs-1 fw-bold">Welcome Back</h1>
       <p className="fs-6 fw-normal">Please log in into your account</p>
       <form className="form mt-3">
-        <div className="col-xxl-10 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+        <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
           <Input
             id="email"
             type="email"
@@ -21,7 +21,7 @@ const Login = () => {
             placeholder="Email Address"
           />
         </div>
-        <div className="col-xxl-10 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+        <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
           <Input
             id="password"
             type="password"
@@ -30,7 +30,7 @@ const Login = () => {
             isbeforeImg={Password}
           />
         </div>
-        <div className="col-xxl-10 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+        <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
           <div className="d-flex justify-content-between mb-3">
             <div className="remember">
               <input
@@ -50,18 +50,18 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div className="col-xxl-10 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+        <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
           <button type="submit" class="primaryBtn">
             Submit
           </button>
         </div>
       </form>
-      <div className="col-xxl-10 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+      <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
         <div class="line-text">
           <span>or</span>
         </div>
       </div>
-      <div className="col-xxl-10 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+      <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
         <div className="row">
           <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
             <button className="loginWith apple">Log in with Apple</button>
@@ -71,7 +71,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="col-xxl-10 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto mt-4">
+      <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto mt-4">
         <p>
           Don't have an account?
           <Link to="/signup" className="btnred">

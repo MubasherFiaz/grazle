@@ -14,7 +14,7 @@ const SignUp = () => {
       <h1 className="fs-1 fw-bold">Get Register!</h1>
       <p className="fs-6 fw-normal">Please Get yourself Register!</p>
       <form className="form mt-3">
-        <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
           <Input
             id="name"
             type="text"
@@ -22,7 +22,7 @@ const SignUp = () => {
             placeholder="Full NAME"
           />
         </div>
-        <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
           <Input
             id="email"
             type="email"
@@ -30,7 +30,7 @@ const SignUp = () => {
             placeholder="Email Address"
           />
         </div>
-        <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
           <Input
             id="password"
             type="password"
@@ -39,7 +39,7 @@ const SignUp = () => {
             isbeforeImg={Password}
           />
         </div>
-        <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
           <Input
             id="password"
             type="password"
@@ -48,7 +48,7 @@ const SignUp = () => {
             isbeforeImg={Password}
           />
         </div>
-        <div className="text-start mb-4 col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto text-start mb-4">
           <input
             type="checkbox"
             id="remember-me"
@@ -59,14 +59,14 @@ const SignUp = () => {
           </label>
         </div>
 
-        <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
           <button type="submit" class="primaryBtn">
             Register
           </button>
         </div>
       </form>
 
-      <div className="mt-5 col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto mt-5">
         <p>
           Already have anaccount?
           <Link to="/login" className="btnred">

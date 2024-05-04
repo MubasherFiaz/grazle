@@ -29,6 +29,7 @@ import Order from "../components/order/Order";
 import AllProduct from "../components/product/AllProduct";
 import Login from "../AuthLayout/loginForm";
 import SignUp from "../AuthLayout/signUpForm";
+import SellerForm from "../AuthLayout/SellerForm";
 import MainLayout from "../layout/MainLayout";
 import AuthLayout from "../layout/AuthLayout";
 
@@ -65,6 +66,7 @@ const Roote = () => {
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/sellerform" element={<SellerForm />} />
         </Route>
       </Routes>
     </BrowserRouter>
