@@ -11,10 +11,9 @@ const UserSiderBAr = () => {
               <li class="mb-2">
                 <NavLink
                   class=" ps-3"
-                  style={{ textDecoration: "none" }}
                   to="/user"
+                  style={{ textDecoration: "none" }}
                 >
-                  {" "}
                   Personal Information
                 </NavLink>
               </li>
@@ -22,9 +21,8 @@ const UserSiderBAr = () => {
                 <NavLink
                   class=" ps-3"
                   style={{ textDecoration: "none" }}
-                  to="/order"
+                  to="/order "
                 >
-                  {" "}
                   My Orders
                 </NavLink>
               </li>
@@ -32,9 +30,8 @@ const UserSiderBAr = () => {
                 <NavLink
                   class=" ps-3"
                   style={{ textDecoration: "none" }}
-                  to="/address"
+                  to="/address "
                 >
-                  {" "}
                   Manage Address
                 </NavLink>
               </li>
@@ -44,7 +41,6 @@ const UserSiderBAr = () => {
                   style={{ textDecoration: "none" }}
                   to="/payment"
                 >
-                  {" "}
                   Payment Method
                 </NavLink>
               </li>
@@ -52,19 +48,13 @@ const UserSiderBAr = () => {
                 <NavLink
                   class=" ps-3"
                   style={{ textDecoration: "none" }}
-                  to="/password"
+                  to="/password "
                 >
-                  {" "}
                   Password Manager
                 </NavLink>
               </li>
               <li class="mb-2">
-                <NavLink
-                  class=" ps-3"
-                  style={{ textDecoration: "none" }}
-                  to="/login"
-                >
-                  {" "}
+                <NavLink class=" ps-3 text-decoration-none" to="/logout">
                   Logout
                 </NavLink>
               </li>

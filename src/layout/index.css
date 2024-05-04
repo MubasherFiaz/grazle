@@ -1,0 +1,121 @@
+* {
+  box-sizing: border-box;
+}
+.authlayoutWrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.side-textbox {
+  border-radius: 88px;
+  background: linear-gradient(163deg, #ff781e 1.87%, #fdc197 88.1%);
+  height: 100%;
+  width: 100%;
+  padding: 80px 30px 0px 30px;
+}
+.side-textbox p {
+  color: #fff;
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0px 0px 15px 0px;
+}
+.side-textbox h3 {
+  color: #fff;
+  font-size: 64px;
+  font-weight: 700;
+}
+
+.side-textbox img {
+  position: relative;
+  margin-bottom: -25px;
+  max-height: 369px;
+  width: 100%;
+  max-width: 560px;
+}
+
+.line-text {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+h1 {
+  color: #191919;
+}
+p {
+  color: #777;
+}
+
+/* Style for the lines */
+.line-text::before,
+.line-text::after {
+  content: "";
+  display: inline-block;
+  width: 45%;
+  border-top: 1px solid #ccc;
+  vertical-align: middle;
+}
+
+/* Style for the text */
+.line-text span {
+  display: inline-block;
+  padding: 0 10px;
+  color: #333;
+}
+.primaryBtn {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+  background-color: #f70000;
+}
+.loginWith {
+  padding: 15px;
+  color: black;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+}
+.apple {
+  background-color: rgba(0, 0, 0, 7%);
+}
+.google {
+  background-color: rgba(247, 0, 0, 7%);
+}
+/* CheckBox style  */
+
+.styled-checkbox {
+  display: none;
+}
+.checkbox-label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+.checkbox-label:before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: #f70000;
+  position: absolute;
+  left: 0;
+  top: 5px;
+  border-radius: 5px;
+}
+.styled-checkbox:checked + .checkbox-label:before {
+  background-color: #f70000;
+}
+.styled-checkbox:checked + .checkbox-label:after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
