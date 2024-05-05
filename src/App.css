@@ -1,3 +1,90 @@
+/* global css */
 a {
-    text-decoration: none;
-  }
+  text-decoration: none;
+}
+.text-themeColor {
+  color: #f70000 !important;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+/* Navbar css */
+.header_middle h5 {
+  color: #393a44;
+}
+.top-search {
+  position: relative;
+}
+.top-search .box-search input {
+  padding: 10px 10px 10px 45px !important;
+}
+.search-icon {
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  border-radius: 50%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  background-color: #f70000;
+}
+.icon {
+  width: 24px;
+  height: 24px;
+}
+.icon img {
+  width: 100% !important;
+  height: 100%;
+}
+
+/* Footer Css */
+.terms-link > *:not(:last-child)::after {
+  content: "|";
+  margin: 0 5px;
+  color: #000;
+}
+.footer-icon {
+  display: flex;
+}
+.footer_qlink_widget {
+  padding: 0px;
+}
+/* Simple Card */
+.best-productCard {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #fff;
+}
+.best-productCard .best-productCard-Header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.best-productCard .cardImage img {
+  width: 100%;
+  height: 100%;
+}
+.best-productCard .best-productCard-Body .title h3 {
+  color: #393a44;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-bottom: 8px;
+}
+.best-productCard .best-productCard-Body .desc a {
+  color: #f70000 !important;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+/* Home Page Section Title */
+.section-title {
+  color: #000;
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: capitalize;
+}

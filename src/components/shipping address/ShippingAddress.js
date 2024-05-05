@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import UserSiderBAr from "../../shared/UserSiderBAr";
 import ToggleSideBar from "../../shared/ToggleSideBar";
 import earpod from "../../assets/image/Rectangle 1951.png";
+import { CartContext } from "../../context/Context";
 const ShippingAddress = () => {
+  const GlobelState = useContext(CartContext);
+  const state = GlobelState.state;
   return (
     <div>
       <section class="our-dashbord dashbord">
@@ -112,35 +115,19 @@ const ShippingAddress = () => {
                 style={{ border: "none", borderRadius: "15px" }}
               >
                 <h4 class="title">Your Card</h4>
-                <div class="d-flex align-items-center">
-                  <div class="me-2">
-                    <img src={earpod} alt="" />
-                  </div>
-                  <div>
-                    <h5>Apple Airpods Pro</h5>
-                    <p>White</p>
-                  </div>
-                </div>
-
-                <div class="d-flex align-items-center">
-                  <div class="me-2">
-                    <img src={earpod} alt="" />
-                  </div>
-                  <div>
-                    <h5>Apple Airpods Pro</h5>
-                    <p>White</p>
-                  </div>
-                </div>
-
-                <div class="d-flex align-items-center">
-                  <div class="me-2">
-                    <img src={earpod} alt="" />
-                  </div>
-                  <div>
-                    <h5>Apple Airpods Pro</h5>
-                    <p>White</p>
-                  </div>
-                </div>
+                {state?.map((item) => {
+                  return (
+                    <div class="d-flex align-items-center">
+                      <div class="me-2">
+                        <img src={item.image} alt="" />
+                      </div>
+                      <div>
+                        <h5>{item.name}</h5>
+                        <p>White</p>
+                      </div>
+                    </div>
+                  );
+                })}
 
                 <h4 class="title mt-4">Cart Total </h4>
 

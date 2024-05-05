@@ -9,6 +9,7 @@ import "./assets/css/fontawesome.css";
 import "./assets/css/jquery-ui.min.css";
 import "./assets/css/magnific-popup.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import Roote from "./routes/Roote";
 
 function App() {

@@ -1,0 +1,91 @@
+.cardWrapper {
+  border-radius: 16px;
+  background: #fff;
+  padding: 8px;
+  border: 1px solid rgba(247, 0, 0, 0.2);
+  box-shadow: 3px 4px 15.6px 0px rgba(247, 0, 0, 0.05);
+}
+.cardWrapper:hover .cardFooter button {
+  visibility: visible;
+}
+
+.cardHeader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.cardHeader .productImage img {
+  width: 100%;
+  height: 100%;
+}
+.cardHeader .features .sale,
+.cardHeader .features .heartIcon {
+  position: absolute;
+  top: 0px;
+}
+.cardHeader .features .sale {
+  left: 0px;
+}
+.cardHeader .features .heartIcon {
+  right: 0px;
+}
+.cardHeader .features .sale button {
+  border: 1px solid #f70000;
+  border-radius: 64px;
+  padding: 4px 16px;
+  color: #f70000;
+  background: linear-gradient(
+      0deg,
+      rgba(247, 0, 0, 0.1) 0%,
+      rgba(247, 0, 0, 0.1) 100%
+    ),
+    #fff;
+}
+/* Card Body */
+.cardBody {
+  margin-bottom: 16px;
+}
+.cardBody .productName h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  font-weight: 700;
+  color: #393a44;
+  margin-bottom: 16px;
+  text-transform: capitalize;
+}
+.cardBody .productRating {
+  margin-bottom: 16px;
+}
+.cardBody .productPrice {
+  font-size: 16px;
+  font-weight: 700;
+  color: #393a44;
+}
+.cardBody .productPrice small {
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 24px;
+  text-transform: capitalize;
+}
+/* Card Footer */
+.cardFooter button {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  flex-shrink: 0;
+  cursor: pointer;
+  color: #f70000;
+  padding: 10px 24px;
+  align-items: center;
+  align-self: stretch;
+  justify-content: center;
+  border-radius: 28px;
+  visibility: hidden;
+  background-color: transparent;
+  border: 1px solid #f70000;
+  transition: background-color 0.3s, color 0.3s;
+}

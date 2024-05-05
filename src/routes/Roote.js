@@ -47,7 +47,7 @@ const Roote = () => {
           <Route path="/success" element={<ConfirmOrder />} />
           <Route path="/orderconfirm" element={<Confirm />} />
           <Route path="/ordercompleted" element={<CompleteOrder />} />
-          <Route path="/shippingAddress" element={<ShippingAddress />} />
+          <Route path="/shippingaddress" element={<ShippingAddress />} />
           <Route path="/trackorder" element={<TrackOrder />} />
           <Route path="/getintouch" element={<GetTouch />} />
           <Route path="/payment" element={<PaymentMethod />} />

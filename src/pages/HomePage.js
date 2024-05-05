@@ -1,11 +1,17 @@
 import React from "react";
-import HomeBody from "../components/Home/HomeBody";
+import HomeTop from "../components/Home/HomeTop";
+import HomeCategory from "../components/Home/HomeCategory";
+import HomeProduct from "../components/Home/HomeProduct";
+import HomeCategory2 from "../components/Home/HomeCategory2";
 
 const HomePage = () => {
   return (
-    <div>
-      <HomeBody />
-    </div>
+    <>
+      <HomeTop />
+      <HomeCategory />
+      <HomeProduct />
+      <HomeCategory2 />
+    </>
   );
 };
 
