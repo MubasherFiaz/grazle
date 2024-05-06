@@ -12,34 +12,38 @@ const Input = ({
   onBlur,
   name,
   placeholder,
+  isError,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div class="input-group mb-3 position-relative">
-      {isbeforeImg ? (
-        <span class="input-group-text">
-          <img src={isbeforeImg} alt="email" />
-        </span>
-      ) : null}
-      <input
-        id={id}
-        type={!showPassword && type === "password" ? "password" : "text"}
-        placeholder={placeholder}
-        className={`${className} form-control loginInput`}
-        onChange={onChange}
-        value={value}
-        name={name}
-        onBlur={onBlur}
-      />
-      {type === "password" ? (
-        <i
-          class={`fa ${!showPassword ? `fa-eye` : `fa-eye-slash`} `}
-          onClick={() => {
-            setShowPassword(!showPassword);
-          }}
-        ></i>
-      ) : null}
+    <div className="mb-3">
+      <div class="input-group position-relative">
+        {isbeforeImg ? (
+          <span class="input-group-text">
+            <img src={isbeforeImg} alt="email" />
+          </span>
+        ) : null}
+        <input
+          id={id}
+          type={!showPassword && type === "password" ? "password" : "text"}
+          placeholder={placeholder}
+          className={`${className} form-control loginInput`}
+          onChange={onChange}
+          value={value}
+          name={name}
+          onBlur={onBlur}
+        />
+        {type === "password" ? (
+          <i
+            class={`fa ${!showPassword ? `fa-eye` : `fa-eye-slash`} `}
+            onClick={() => {
+              setShowPassword(!showPassword);
+            }}
+          ></i>
+        ) : null}
+      </div>
+      {isError && <p className="text-danger text-start">{isError}</p>}
     </div>
   );
 };
