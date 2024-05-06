@@ -9,6 +9,8 @@ const Input = ({
   className,
   isbeforeImg,
   onChange,
+  onBlur,
+  name,
   placeholder,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,6 +29,8 @@ const Input = ({
         className={`${className} form-control loginInput`}
         onChange={onChange}
         value={value}
+        name={name}
+        onBlur={onBlur}
       />
       {type === "password" ? (
         <i

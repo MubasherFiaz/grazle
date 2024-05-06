@@ -27,9 +27,9 @@ import ConfirmOrder from "../components/confirm order/ConfirmOrder";
 import CompleteOrder from "../components/complete order/CompleteOrder";
 import Order from "../components/order/Order";
 import AllProduct from "../components/product/AllProduct";
-import Login from "../AuthLayout/loginForm";
-import SignUp from "../AuthLayout/signUpForm";
-import SellerForm from "../AuthLayout/SellerForm";
+import Login from "../AuthForms/loginForm";
+import SignUp from "../AuthForms/signUpForm";
+import SellerForm from "../AuthForms/SellerForm";
 import MainLayout from "../layout/MainLayout";
 import AuthLayout from "../layout/AuthLayout";
 
