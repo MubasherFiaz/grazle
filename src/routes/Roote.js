@@ -1,5 +1,7 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import Protected from "./Protected";
+import LoginRedirect from "./LoginRedirect";
 import HomePage from "../pages/HomePage";
 import Product from "../pages/Product";
 import Cart from "../pages/Cart";
@@ -34,6 +36,28 @@ import MainLayout from "../layout/MainLayout";
 import AuthLayout from "../layout/AuthLayout";
 
 const Roote = () => {
+    const [isLoggedIn, setisLoggedIn] = useState(null);
+    // const navigate = useNavigate();
+    const login_info = localStorage.getItem("login_token");
+    function set_login_status() {
+      if (login_info) {
+        setisLoggedIn(true);
+      } else {
+        setisLoggedIn(false);
+      }
+    }
+
+    useEffect(() => {
+      set_login_status();
+    }, []);
+    // const logIn = () => {
+    //   navigate("/index");
+    // };
+    // const logOut = () => {
+    //   setisLoggedIn(false);
+    //   localStorage.removeItem("login_token");
+    //   navigate("/");
+    // };
   return (
     <BrowserRouter>
       <Routes>
@@ -55,7 +79,16 @@ const Roote = () => {
           <Route path="/address1" element={<Address />} />
           <Route path="/order1" element={<Order />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/user" element={<User />} />
+          <Route
+            exact
+            path="/user"
+            element={
+              <Protected isLoggedIn={login_info}>
+                <User />
+              </Protected>
+            }
+          />
+          {/* <Route path="/user" element={<User />} /> */}
           <Route path="/password" element={<PasswordManager />} />
           <Route path="/address" element={<ManageAddress />} />
           <Route path="/favourite" element={<Favourite />} />
@@ -64,7 +97,16 @@ const Roote = () => {
           <Route path="*" element={<ErrorPage />} />
         </Route>
         <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
+          <Route
+            exact
+            path="/login"
+            element={
+              <LoginRedirect isLoggedIn={login_info}>
+                <Login />
+              </LoginRedirect>
+            }
+          />
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/signup" element={<SignUp />} />
           <Route path="/sellerform" element={<SellerForm />} />
         </Route>
