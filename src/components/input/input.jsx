@@ -13,6 +13,7 @@ const Input = ({
   name,
   placeholder,
   isError,
+  isInputBg = false,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -28,7 +29,9 @@ const Input = ({
           id={id}
           type={!showPassword && type === "password" ? "password" : "text"}
           placeholder={placeholder}
-          className={`${className} form-control loginInput`}
+          className={`${className} form-control loginInput ${
+            isInputBg ? "inputBg" : null
+          }`}
           onChange={onChange}
           value={value}
           name={name}

@@ -1,0 +1,65 @@
+.plans-heading {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.plans-heading h2 {
+  color: #000;
+  font-size: 40px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.plans-card {
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0px 4px 29px 0px rgba(0, 0, 0, 0.04);
+  padding: 15px;
+}
+.plans-metas {
+  border-radius: 14px;
+  background: rgba(247, 0, 0, 0.01);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+.plans-metas span {
+  color: #777;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+.plans-metas p {
+  color: #f70000;
+  text-align: center;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.plans-btn {
+  border-radius: 14px;
+  background: #f70000;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-transform: capitalize;
+  transition: 0.5s;
+}
+.plans-btn:hover {
+  background: rgba(247, 0, 0, 0.01);
+}
