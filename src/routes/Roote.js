@@ -36,28 +36,28 @@ import MainLayout from "../layout/MainLayout";
 import AuthLayout from "../layout/AuthLayout";
 
 const Roote = () => {
-    const [isLoggedIn, setisLoggedIn] = useState(null);
-    // const navigate = useNavigate();
-    const login_info = localStorage.getItem("login_token");
-    function set_login_status() {
-      if (login_info) {
-        setisLoggedIn(true);
-      } else {
-        setisLoggedIn(false);
-      }
+  const [isLoggedIn, setisLoggedIn] = useState(null);
+  // const navigate = useNavigate();
+  const login_info = localStorage.getItem("login_token");
+  function set_login_status() {
+    if (login_info) {
+      setisLoggedIn(true);
+    } else {
+      setisLoggedIn(false);
     }
+  }
 
-    useEffect(() => {
-      set_login_status();
-    }, []);
-    // const logIn = () => {
-    //   navigate("/index");
-    // };
-    // const logOut = () => {
-    //   setisLoggedIn(false);
-    //   localStorage.removeItem("login_token");
-    //   navigate("/");
-    // };
+  useEffect(() => {
+    set_login_status();
+  }, []);
+  // const logIn = () => {
+  //   navigate("/index");
+  // };
+  // const logOut = () => {
+  //   setisLoggedIn(false);
+  //   localStorage.removeItem("login_token");
+  //   navigate("/");
+  // };
   return (
     <BrowserRouter>
       <Routes>
@@ -76,10 +76,10 @@ const Roote = () => {
           <Route path="/getintouch" element={<GetTouch />} />
           <Route path="/payment" element={<PaymentMethod />} />
           <Route path="/orderhistory" element={<OrderHistory />} />
-          <Route path="/address1" element={<Address />} />
+          <Route path="/alladdress" element={<Address />} />
           <Route path="/order1" element={<Order />} />
           <Route path="/cart" element={<Cart />} />
-          <Route
+          {/* <Route
             exact
             path="/user"
             element={
@@ -87,8 +87,8 @@ const Roote = () => {
                 <User />
               </Protected>
             }
-          />
-          {/* <Route path="/user" element={<User />} /> */}
+          /> */}
+          <Route path="/user" element={<User />} />
           <Route path="/password" element={<PasswordManager />} />
           <Route path="/address" element={<ManageAddress />} />
           <Route path="/favourite" element={<Favourite />} />
