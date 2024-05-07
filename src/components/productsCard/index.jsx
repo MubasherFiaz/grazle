@@ -6,13 +6,12 @@ import Heart from "../../assets/svg/heart.svg";
 // @ import css
 import "./index.css";
 
-const ProductsCard = ({ items, onClick }) => {
-  const item = items;
+const ProductsCard = ({ item, onClick }) => {
   return (
     <div className="cardWrapper">
       <div className="cardHeader">
         <div className="productImage">
-          <img src={item.image} />
+          <img src={item?.image} alt="Product Image" />
         </div>
         <div className="features">
           <div className="sale">
@@ -25,18 +24,20 @@ const ProductsCard = ({ items, onClick }) => {
       </div>
       <div className="cardBody">
         <div className="productName">
-          <h3>{item.name}</h3>
+          <h3>{item?.name}</h3>
         </div>
         <div className="productRating">
           <StarRating />
         </div>
         <div className="productPrice">
-          <h3>₹{item.price}</h3>
+          <h3>₹{item?.min_max_price?.max_special_price?.toFixed(2)}</h3>
           <small>
-            <del>₹{item.discount}</del>
+            <del>₹{item?.min_max_price?.max_price}</del>
           </small>
           <small>
-            <span className="text-success">{item.discountPercentage}% off</span>
+            <span className="text-success">
+              {item?.min_max_price?.discount_in_percentage}% off
+            </span>
           </small>
         </div>
       </div>

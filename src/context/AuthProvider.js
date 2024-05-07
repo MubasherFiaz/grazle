@@ -6,19 +6,16 @@ export const useAuth = () => {
 };
 const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
-  const [authUser, setAuthUser] = useState({});
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
   const [isuser, setIsUser] = useState(false);
 
   const value = {
     isLogin,
     setIsLogin,
-    authUser,
-    setAuthUser,
     isuser,
     setIsUser,
-    isAdmin,
-    setIsAdmin,
+    isSeller,
+    setIsSeller,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

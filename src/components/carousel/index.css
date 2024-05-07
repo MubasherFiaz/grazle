@@ -45,3 +45,9 @@
   left: unset;
   right: 45px;
 }
+.swiper-pagination {
+  bottom: 0px !important;
+}
+.swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #f70000 !important;
+}

@@ -20,10 +20,10 @@ export const OnRegister = (values) => {
 
 export const onLogin = async (values) => {
   const formData = new FormData();
-  formData.append("type", 'phone');
-  formData.append("country_code", '12');
-  formData.append("mobile", '03095090605');
-  formData.append("name", 'mobi');
+  formData.append("type", "phone");
+  formData.append("country_code", "12");
+  formData.append("mobile", "03095090605");
+  formData.append("name", "mobi");
   formData.append("email", values.email);
   formData.append("password", values.password);
   return new Promise(async (resolve, reject) => {
@@ -51,27 +51,16 @@ export const onLogin = async (values) => {
   });
 };
 export const globalApi = async (api) => {
- 
-  return new Promise(async (resolve, reject) => {
-    try {
-      axios
-        .get(
-          api,
-          {
-            headers: {
-              "X-Requested-With": "XMLHttpRequest",
-            },
-          }
-        )
-        .then(({ data }) => {
-         
-          resolve(data);
-        })
-        .catch(({ response }) => {
-          resolve("error");
-        });
-    } catch (err) {
-      reject(err);
-    }
-  });
+  try {
+    const response = await axios.get(api, {
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    // Handle error
+    console.error("Error fetching data:", error);
+    throw error; // Re-throw the error to propagate it
+  }
 };

@@ -20,7 +20,7 @@ const Footer = () => {
               <div className="footer_contact_widget">
                 <img src={footerlogo} alt="" />
                 <div className="social_icon_list mt30">
-                  <ul className="mb20 d-flex">
+                  <ul className="mb20 d-flex p-0">
                     <li className="list-inline-item">
                       <Link style={{ textDecoration: "none" }} to="#">
                         <img src={Instagam} alt="Instagam" />

@@ -80,12 +80,7 @@ const RelatedProduct = () => {
                       (item.quantity = 1),
                       (
                         <SwiperSlide key={item.id}>
-                          <ProductsCard
-                            items={item}
-                            onClick={() => {
-                              dispatch({ type: "ADD", payload: item });
-                            }}
-                          />
+                          <ProductsCard items={item} />
                         </SwiperSlide>
                       )
                     );

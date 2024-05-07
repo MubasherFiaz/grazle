@@ -1,11 +1,11 @@
 import React from "react";
 // @ import media
 import boy from "../assets/image/boy.png";
-import loginImg from "../assets/image/login-img.png"
+import loginImg from "../assets/image/login-img.png";
 import LogoImage from "../assets/image/grazleLogo.png";
 // @ import styles
 import "./index.css";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const AuthLayout = () => {
   return (
@@ -19,7 +19,9 @@ const AuthLayout = () => {
           </div>
           <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
             <div className="text-center loginImg">
-              <img src={LogoImage} alt="LogoImage" />
+              <Link to={"/"}>
+                <img src={LogoImage} alt="LogoImage" />
+              </Link>
               <Outlet />
             </div>
           </div>

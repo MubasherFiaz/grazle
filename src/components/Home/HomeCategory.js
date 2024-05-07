@@ -14,16 +14,7 @@ import { Link } from "react-router-dom";
 import { SwiperSlide } from "swiper/react";
 import Carousel from "../carousel";
 
-const HomeCategory = () => {
-  const items = [
-    { id: "1", category: "categories", image: category },
-    { id: "2", category: "categories", image: category1 },
-    { id: "3", category: "categories", image: category2 },
-    { id: "4", category: "categories", image: category3 },
-    { id: "5", category: "categories", image: category4 },
-    { id: "6", category: "categories", image: category5 },
-    { id: "7", category: "categories", image: category6 },
-  ];
+const HomeCategory = ({ data }) => {
   const card = [
     {
       id: "1",
@@ -69,10 +60,10 @@ const HomeCategory = () => {
                 <Carousel
                   spaceBetween={20}
                   navigation={false}
-                  pagination={false}
+                  pagination={true}
                   isResponsive={true}
                 >
-                  {items?.map((item) => {
+                  {data?.map((item) => {
                     return (
                       <SwiperSlide key={item.id}>
                         <div className="item">
@@ -87,7 +78,7 @@ const HomeCategory = () => {
                               </div>
                               <div className="details">
                                 <h5 className="title text-black">
-                                  {item.category}
+                                  {item.name}
                                 </h5>
                               </div>
                             </div>

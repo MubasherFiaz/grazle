@@ -46,6 +46,7 @@ const CartComponent = () => {
   const state = GlobelState.state;
   const dispatch = GlobelState.dispatch;
   let TotalValue = 0;
+  let totalValuebeforeDisscount = 0;
   return (
     <div>
       <div className="body_content_wrapper position-relative mt-2">
@@ -108,7 +109,13 @@ const CartComponent = () => {
             <div className="col-lg-8 col-xl-9 cart-items">
               <div>
                 {state?.map((item) => {
-                  TotalValue = TotalValue + Number(item.price) * item.quantity;
+                  TotalValue =
+                    TotalValue +
+                    Number(item?.min_max_price?.max_special_price) *
+                      item.quantity;
+                  totalValuebeforeDisscount =
+                    totalValuebeforeDisscount +
+                    Number(item?.min_max_price?.max_price) * item.quantity;
                   return (
                     <div
                       key={item.id}
@@ -134,7 +141,12 @@ const CartComponent = () => {
                               <input type="checkbox" />
                               <span className="checkmark"></span>
                             </label>
-                            <img src={item.image} alt="" className="me-md-4" />
+                            <img
+                              src={item.image}
+                              alt=""
+                              className="me-md-4"
+                              style={{ width: "100px", height: "100px" }}
+                            />
                             <div className="customcart">
                               <h4>{item.name}</h4>
                               <p>
@@ -142,12 +154,12 @@ const CartComponent = () => {
                                   className="badge badge-danger badge-soft me-2"
                                   style={{ color: "#F70000" }}
                                 >
-                                  10%
+                                  {item?.min_max_price?.discount_in_percentage}%
                                 </span>
-                                <del>Rs {item.discount}</del>
+                                <del>₹{item?.min_max_price?.max_price}</del>
                               </p>
                               <h5 style={{ fontSize: "18px" }}>
-                                Rs {item.price}
+                                ₹ {item?.min_max_price?.max_special_price}
                               </h5>
                             </div>
                           </div>
@@ -223,32 +235,26 @@ const CartComponent = () => {
                   <button>Apply</button>
                 </div>
                 <hr />
-                <h4 className="title">Cart Total</h4>
-                <ul>
-                  <li className="subtitle">
-                    <p>
-                      Shipping<span className="float-end">Free</span>
-                    </p>
-                  </li>
-                  <li className="subtitle">
-                    <p>
-                      Discount<span className="float-end">$66.00</span>
-                    </p>
-                  </li>
-                  <li className="subtitle">
-                    <p>
-                      Cart Total<span className="float-end">$66.00</span>
-                    </p>
-                  </li>
-                  {state.length > 0 && (
-                    <div className="d-flex justify-content-between mt-3">
-                      <h4 className="fs-5 fw-bolder">Grand Total:</h4>
-                      <span className="text-success fw-bolder">
-                        ${TotalValue}
-                      </span>
-                    </div>
-                  )}
-                </ul>
+                <div className="cart-total">
+                  <h4 class="title mt-4">Cart Total</h4>
+                  <div className="d-flex justify-content-between align-items-start">
+                    <label></label>
+                    <p>₹{totalValuebeforeDisscount}</p>
+                  </div>
+                  <div className="d-flex justify-content-between align-items-start">
+                    <label>Shipping</label>
+                    <p>Free</p>
+                  </div>
+                  <div className="d-flex justify-content-between align-items-start border-bottom">
+                    <label>Discount</label>
+                    <p>₹{totalValuebeforeDisscount - TotalValue}</p>
+                  </div>
+                  <div className="d-flex justify-content-between align-items-start mt-2">
+                    <label>Cart Total</label>
+                    <p>₹{TotalValue}</p>
+                  </div>
+                </div>
+
                 <div className="ui_kit_button payment_widget_btn">
                   <button
                     type="button"

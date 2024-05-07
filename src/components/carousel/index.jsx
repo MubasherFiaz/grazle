@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "./index.css";
 
 const Carousel = ({
-  loop = true,
+  loop,
   children,
   navigation,
   pagination,

@@ -101,43 +101,6 @@ const HomeCategory2 = () => {
           </div>
         </div>
       </section>
-      <section className="trending-product pt0">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div class="main-title d-flex justify-content-between">
-                {" "}
-                <h2 className="title section-title">Trending</h2>
-              </div>
-
-              <div className="position-relative">
-                <Carousel
-                  spaceBetween={20}
-                  navigation={true}
-                  pagination={false}
-                  isResponsive={true}
-                >
-                  {slicedItems?.map((item) => {
-                    return (
-                      (item.quantity = 1),
-                      (
-                        <SwiperSlide key={item.id}>
-                          <ProductsCard
-                            items={item}
-                            onClick={() => {
-                              dispatch({ type: "ADD", payload: item });
-                            }}
-                          />
-                        </SwiperSlide>
-                      )
-                    );
-                  })}
-                </Carousel>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="top-category  ">
         <div className="container">

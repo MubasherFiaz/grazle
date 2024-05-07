@@ -297,7 +297,11 @@ const ShippingAddress = () => {
                   return (
                     <div class="d-flex align-items-center">
                       <div class="me-2">
-                        <img src={item.image} alt="" />
+                        <img
+                          src={item.image}
+                          alt="product image"
+                          style={{ width: "100px", height: "100px" }}
+                        />
                       </div>
                       <div className="text-ellipsis">
                         <h5>{item.name}</h5>
