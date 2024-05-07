@@ -78,9 +78,10 @@ const Roote = () => {
           <Route path="/getintouch" element={<GetTouch />} />
           <Route path="/payment" element={<PaymentMethod />} />
           <Route path="/orderhistory" element={<OrderHistory />} />
-          <Route path="/address1" element={<Address />} />
+          <Route path="/alladdress" element={<Address />} />
           <Route path="/order1" element={<Order />} />
           <Route path="/cart" element={<Cart />} />
+          {/* <Route
           <Route path="/plans" element={<Plans />} />
           <Route path="/credit" element={<Credit />} />
           <Route
@@ -91,8 +92,8 @@ const Roote = () => {
                 <User />
               </Protected>
             }
-          />
-          {/* <Route path="/user" element={<User />} /> */}
+          /> */}
+          <Route path="/user" element={<User />} />
           <Route path="/password" element={<PasswordManager />} />
           <Route path="/address" element={<ManageAddress />} />
           <Route path="/favourite" element={<Favourite />} />

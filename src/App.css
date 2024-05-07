@@ -5,8 +5,16 @@ a {
 .text-themeColor {
   color: #f70000 !important;
 }
+.bg-themeColor {
+  background-color: #f70000 !important;
+}
 .cursor-pointer {
   cursor: pointer;
+}
+.text-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 /* Navbar css */
 .header_middle h5 {

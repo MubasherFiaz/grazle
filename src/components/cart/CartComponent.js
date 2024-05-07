@@ -108,8 +108,7 @@ const CartComponent = () => {
             <div className="col-lg-8 col-xl-9 cart-items">
               <div>
                 {state?.map((item) => {
-                  TotalValue =
-                    Number(TotalValue) + Number(item.price) * item.quantity;
+                  TotalValue = TotalValue + Number(item.price) * item.quantity;
                   return (
                     <div
                       key={item.id}
@@ -256,7 +255,7 @@ const CartComponent = () => {
                     className="btn btn-thm btn-block"
                     onClick={() => {
                       if (state.length > 0) {
-                        navigate("/shippingaddress");
+                        navigate("/alladdress");
                       } else {
                         console.log("Please Buy Product");
                       }

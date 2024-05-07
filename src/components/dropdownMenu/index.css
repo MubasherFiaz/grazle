@@ -1,0 +1,5 @@
+#dropDownMenuItem .dropdown-item:active {
+  color: white !important;
+  border-radius: 10px;
+  background-color: #f70000 !important;
+}

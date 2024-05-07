@@ -13,6 +13,7 @@ import Heart from "../assets/svg/heart.svg";
 import Cart from "../assets/svg/Cart.svg";
 //@ import context
 import { CartContext } from "../context/Context";
+import DropDownMenu from "../components/dropdownMenu";
 const Navbar = () => {
   const GlobelState = useContext(CartContext);
   const badge = GlobelState.state.length;
@@ -151,12 +152,16 @@ const Navbar = () => {
                       </p>
                     </div>
 
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      to="/user"
-                      className="header_iconbox_home3_style cart-filter-btn"
-                    >
-                      <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center dropdown">
+                      <a
+                        style={{ textDecoration: "none" }}
+                        href="#"
+                        role="button"
+                        id="dropdownMenuLink"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        className="header_iconbox_home3_style cart-filter-btn"
+                      >
                         <img
                           src={image1}
                           alt=""
@@ -167,8 +172,24 @@ const Navbar = () => {
                             outline: "1px solid red",
                           }}
                         />
-                      </div>
-                    </Link>
+                      </a>
+                      <ul
+                        class="dropdown-menu dropdown-menu-end mt-3 border-0 shadow p-1"
+                        aria-labelledby="dropdownMenuLink"
+                        style={{ width: "250px", borderRadius: "10px" }}
+                      >
+                        <DropDownMenu label="Your Account" link="/user" />
+                        <DropDownMenu label="Favourites" />
+                        <DropDownMenu label="Manage Addresses" />
+                        <DropDownMenu label="Credit Limit" />
+                        <DropDownMenu label="Grazzle Membership" />
+                        <DropDownMenu label="Notification Settings" />
+                        <p className="m-0 p-2">Grazle</p>
+                        <DropDownMenu label="FAQs" />
+                        <DropDownMenu label="Terms of Use" />
+                        <DropDownMenu label="Privacy Policy" />
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
