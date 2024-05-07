@@ -21,7 +21,10 @@ export const OnRegister = (values) => {
 export const onLogin = async (values) => {
   const formData = new FormData();
   formData.append("type", 'phone');
-  formData.append("identity", values.email);
+  formData.append("country_code", '12');
+  formData.append("mobile", '03095090605');
+  formData.append("name", 'mobi');
+  formData.append("email", values.email);
   formData.append("password", values.password);
   return new Promise(async (resolve, reject) => {
     try {
@@ -37,6 +40,31 @@ export const onLogin = async (values) => {
         )
         .then(({ data }) => {
           console.log("data", data);
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          resolve("error");
+        });
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+export const globalApi = async (api) => {
+ 
+  return new Promise(async (resolve, reject) => {
+    try {
+      axios
+        .get(
+          api,
+          {
+            headers: {
+              "X-Requested-With": "XMLHttpRequest",
+            },
+          }
+        )
+        .then(({ data }) => {
+         
           resolve(data);
         })
         .catch(({ response }) => {
