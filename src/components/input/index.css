@@ -16,3 +16,9 @@
   border: none;
   background-color: #f5f5f5;
 }
+.inputBg {
+  background-color: transparent;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  color: #000;
+}

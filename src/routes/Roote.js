@@ -29,6 +29,8 @@ import ConfirmOrder from "../components/confirm order/ConfirmOrder";
 import CompleteOrder from "../components/complete order/CompleteOrder";
 import Order from "../components/order/Order";
 import AllProduct from "../components/product/AllProduct";
+import Plans from "../components/plans";
+import Credit from "../components/credit";
 import Login from "../AuthForms/loginForm";
 import SignUp from "../AuthForms/signUpForm";
 import SellerForm from "../AuthForms/SellerForm";
@@ -80,6 +82,9 @@ const Roote = () => {
           <Route path="/order1" element={<Order />} />
           <Route path="/cart" element={<Cart />} />
           {/* <Route
+          <Route path="/plans" element={<Plans />} />
+          <Route path="/credit" element={<Credit />} />
+          <Route
             exact
             path="/user"
             element={

@@ -8,7 +8,7 @@ import Email from "../../assets/svg/email.svg";
 import Password from "../../assets/svg/password.svg";
 import { Formik } from "formik";
 import * as Yup from "yup";
-
+import { onLogin } from "../../apis/AuthApis";
 const Login = () => {
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),
@@ -16,8 +16,10 @@ const Login = () => {
       .required("Required")
       .min(3, "Enter Minimum 3 digits"),
   });
-  const handleLogin = (values) => {
+  const handleLogin = async (values) => {
     console.log("login", values);
+    let loginResponse = await onLogin(values);
+    console.log("loginResponse", loginResponse);
   };
   return (
     <>
