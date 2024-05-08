@@ -13,6 +13,9 @@ const HomeProduct = ({ data }) => {
   const handleAddtoCart = (item) => {
     if (isLogin) {
       dispatch({ type: "ADD", payload: item });
+      toast.success("Product Added to Cart", {
+        autoClose: 3000,
+      });
     } else {
       toast.error("Login First to Add Product", {
         autoClose: 3000,

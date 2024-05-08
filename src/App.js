@@ -34,9 +34,9 @@ function App() {
 
   return (
     <>
-      <Loader isLoader={isLoading} />
       <Roote />
       <ToastContainer />
+      <Loader isLoader={isLoading} />
     </>
   );
 }
