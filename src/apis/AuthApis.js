@@ -1,54 +1,51 @@
 import axios from "axios";
 
-export const OnRegister = (values) => {
-  console.log("Success:", values.email);
+export const OnRegister = async (values) => {
+  console.log(values, "value");
   const formData = new FormData();
+  formData.append("type", "phone");
+  formData.append("country_code", values.code);
+  formData.append("mobile", values.number);
   formData.append("email", values.email);
   formData.append("password", values.password);
-  formData.append("c_password", values.c_password);
-  formData.append("name", values.name);
-  axios
-    .post(`https://aquaconcepts78.fr/grazleBackend/api/register`, formData)
-    .then(({ data }) => {
-      localStorage.setItem("login_token", data.success.token);
-      return data;
-    })
-    .catch(({ response }) => {
-      return response;
-    });
+  formData.append("c_password", values.confirmPassword);
+  formData.append("name", values.fullName);
+  console.log(formData, "formData");
+  try {
+    const response = await axios.post(
+      `https://aquaconcepts78.fr/grazleBackend/api/register`,
+      formData
+    );
+
+    localStorage.setItem("login_token", JSON.stringify(response.data));
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const onLogin = async (values) => {
   const formData = new FormData();
-  formData.append("type", "phone");
-  formData.append("country_code", "12");
-  formData.append("mobile", "03095090605");
-  formData.append("name", "mobi");
-  formData.append("email", values.email);
+  formData.append("identity", values.email);
   formData.append("password", values.password);
-  return new Promise(async (resolve, reject) => {
-    try {
-      axios
-        .post(
-          `https://aquaconcepts78.fr/grazleBackend/api/register`,
-          formData,
-          {
-            headers: {
-              "X-Requested-With": "XMLHttpRequest",
-            },
-          }
-        )
-        .then(({ data }) => {
-          console.log("data", data);
-          resolve(data);
-        })
-        .catch(({ response }) => {
-          resolve("error");
-        });
-    } catch (err) {
-      reject(err);
-    }
-  });
+  try {
+    const response = await axios.post(
+      `https://aquaconcepts78.fr/grazleBackend/api/login`,
+      formData,
+      {
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      }
+    );
+
+    localStorage.setItem("login_token", JSON.stringify(response.data));
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 export const globalApi = async (api) => {
   try {

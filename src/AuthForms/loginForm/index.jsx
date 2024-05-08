@@ -1,6 +1,6 @@
 import React from "react";
 // @ import dependencies
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // @ import components
 import Input from "../../components/input/input";
 // @ import media
@@ -9,7 +9,13 @@ import Password from "../../assets/svg/password.svg";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { onLogin } from "../../apis/AuthApis";
+import { useAuth } from "../../context/AuthProvider";
+import { toast } from "react-toastify";
+
 const Login = () => {
+  const { setIsLoading } = useAuth();
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),
     password: Yup.string()
@@ -17,10 +23,18 @@ const Login = () => {
       .min(3, "Enter Minimum 3 digits"),
   });
   const handleLogin = async (values) => {
-    console.log("login", values);
+    setIsLoading(true);
     let loginResponse = await onLogin(values);
-    console.log("loginResponse", loginResponse);
+    if (loginResponse.message === "Logged In Successfully") {
+      setIsLoading(false);
+      toast.success(loginResponse.message);
+      navigate("/");
+    } else {
+      setIsLoading(false);
+      toast.error(loginResponse.message);
+    }
   };
+
   return (
     <>
       <h1 className="fs-1 fw-bold">Welcome Back</h1>

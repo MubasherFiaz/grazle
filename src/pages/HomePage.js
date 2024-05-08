@@ -3,23 +3,25 @@ import HomeTop from "../components/Home/HomeTop";
 import HomeCategory from "../components/Home/HomeCategory";
 import HomeProduct from "../components/Home/HomeProduct";
 import HomeCategory2 from "../components/Home/HomeCategory2";
-import Loader from "../assets/svg/loader.gif";
+
 import { globalApi } from "../apis/AuthApis";
+import { useAuth } from "../context/AuthProvider";
 
 const HomePage = () => {
   const [homeData, setHomeData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { setIsLoading } = useAuth();
 
   const getHomeData = async () => {
     try {
+      setIsLoading(true);
       const data = await globalApi(
         "https://aquaconcepts78.fr/grazleBackend/api/home"
       );
       setHomeData(data);
-      setLoading(false);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -29,21 +31,6 @@ const HomePage = () => {
     };
     fetchData();
   }, []);
-  if (loading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <img src={Loader} alt="Loading..." />
-      </div>
-    );
-  }
-  console.log("home data", homeData);
   return (
     <>
       <HomeTop data={homeData?.sliders} />

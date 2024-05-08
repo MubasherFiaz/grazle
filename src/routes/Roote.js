@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Protected from "./Protected";
 import LoginRedirect from "./LoginRedirect";
 import HomePage from "../pages/HomePage";
@@ -61,27 +61,26 @@ const Roote = () => {
   //   navigate("/");
   // };
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/productdetail" element={<ProductDetail />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/faq" element={<FaqComponent />} />
-          <Route path="/review" element={<Review />} />
-          <Route path="/success" element={<ConfirmOrder />} />
-          <Route path="/orderconfirm" element={<Confirm />} />
-          <Route path="/ordercompleted" element={<CompleteOrder />} />
-          <Route path="/shippingaddress" element={<ShippingAddress />} />
-          <Route path="/trackorder" element={<TrackOrder />} />
-          <Route path="/getintouch" element={<GetTouch />} />
-          <Route path="/payment" element={<PaymentMethod />} />
-          <Route path="/orderhistory" element={<OrderHistory />} />
-          <Route path="/alladdress" element={<Address />} />
-          <Route path="/order1" element={<Order />} />
-          <Route path="/cart" element={<Cart />} />
-          {/* <Route
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/productdetail" element={<ProductDetail />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/faq" element={<FaqComponent />} />
+        <Route path="/review" element={<Review />} />
+        <Route path="/success" element={<ConfirmOrder />} />
+        <Route path="/orderconfirm" element={<Confirm />} />
+        <Route path="/ordercompleted" element={<CompleteOrder />} />
+        <Route path="/shippingaddress" element={<ShippingAddress />} />
+        <Route path="/trackorder" element={<TrackOrder />} />
+        <Route path="/getintouch" element={<GetTouch />} />
+        <Route path="/payment" element={<PaymentMethod />} />
+        <Route path="/orderhistory" element={<OrderHistory />} />
+        <Route path="/alladdress" element={<Address />} />
+        <Route path="/order1" element={<Order />} />
+        <Route path="/cart" element={<Cart />} />
+        {/* <Route
           <Route path="/plans" element={<Plans />} />
           <Route path="/credit" element={<Credit />} />
           <Route
@@ -93,30 +92,29 @@ const Roote = () => {
               </Protected>
             }
           /> */}
-          <Route path="/user" element={<User />} />
-          <Route path="/password" element={<PasswordManager />} />
-          <Route path="/address" element={<ManageAddress />} />
-          <Route path="/favourite" element={<Favourite />} />
-          <Route path="/order" element={<MyOrder />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Route>
-        <Route element={<AuthLayout />}>
-          <Route
-            exact
-            path="/login"
-            element={
-              <LoginRedirect isLoggedIn={login_info}>
-                <Login />
-              </LoginRedirect>
-            }
-          />
-          {/* <Route path="/login" element={<Login />} /> */}
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/sellerform" element={<SellerForm />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        <Route path="/user" element={<User />} />
+        <Route path="/password" element={<PasswordManager />} />
+        <Route path="/address" element={<ManageAddress />} />
+        <Route path="/favourite" element={<Favourite />} />
+        <Route path="/order" element={<MyOrder />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Route>
+      <Route element={<AuthLayout />}>
+        <Route
+          exact
+          path="/login"
+          element={
+            // <LoginRedirect isLoggedIn={login_info}>
+            <Login />
+            // </LoginRedirect>
+          }
+        />
+        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/sellerform" element={<SellerForm />} />
+      </Route>
+    </Routes>
   );
 };
 

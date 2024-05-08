@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [isSeller, setIsSeller] = useState(false);
   const [isuser, setIsUser] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const value = {
     isLogin,
@@ -16,6 +17,8 @@ const AuthProvider = ({ children }) => {
     setIsUser,
     isSeller,
     setIsSeller,
+    isLoading,
+    setIsLoading,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
