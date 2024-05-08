@@ -4475,11 +4475,11 @@ form.listing_page_v9 {
   position: absolute;
   right: 30px;
 }
-.banner-style-one .slide {
+/* .banner-style-one .slide {
   padding: 165px 0;
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 .banner-style-one .slide:before {
   background-color: transparent;
   bottom: 0;
@@ -4652,10 +4652,10 @@ form.listing_page_v9 {
   max-width: 1170px;
   text-align: center;
 }
-.home1_style .banner-style-one .slide {
+/* .home1_style .banner-style-one .slide {
   padding: 68px 0;
   height: 40rem;
-}
+} */
 
 .accordion-item > .accordion-header .accordion-button {
   background: rgba(247, 0, 0, 0.06);
