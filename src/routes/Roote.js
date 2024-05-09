@@ -81,6 +81,9 @@ const Roote = () => {
         <Route path="/alladdress" element={<Address />} />
         <Route path="/order1" element={<Order />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/termscondition" element={<TermsCondition />} />
+        <Route path="/plans" element={<Plans />} />
+        <Route path="/credit" element={<Credit />} />
         {/* <Route
           <Route path="/plans" element={<Plans />} />
           <Route path="/credit" element={<Credit />} />

@@ -19,7 +19,7 @@ import "./App.css";
 import Roote from "./routes/Roote";
 
 function App() {
-  const { setIsLogin, isLoading } = useAuth();
+  const { setIsLogin } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("login_token"));
@@ -36,7 +36,6 @@ function App() {
     <>
       <Roote />
       <ToastContainer />
-      <Loader isLoader={isLoading} />
     </>
   );
 }
