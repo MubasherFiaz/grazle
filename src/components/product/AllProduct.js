@@ -14,6 +14,7 @@ import { globalApi } from "../../apis/AuthApis";
 import ProductsCard from "../productsCard";
 import { CartContext } from "../../context/Context";
 import { toast } from "react-toastify";
+import { Pagination } from "react-bootstrap";
 
 const AllProduct = () => {
   const GlobelState = useContext(CartContext);
@@ -36,7 +37,7 @@ const AllProduct = () => {
       );
       console.log("Product Data", data.data);
       setAllProductsData(data.data);
-      setTotalPages(data.data.products.total / 12);
+      setTotalPages(Math.ceil(data.data.products.total / 12));
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -64,27 +65,55 @@ const AllProduct = () => {
     }
   };
 
-  const handlePageChange = (page) => {
+  const onPageChange = (page) => {
     setCurrentPage(page);
   };
 
   const renderPaginationLinks = () => {
     const links = [];
+    const maxVisiblePages = 5;
+    const ellipsisThreshold = 2;
+    let startPage = Math.max(1, currentPage - ellipsisThreshold);
+    let endPage = Math.min(totalPages, currentPage + ellipsisThreshold);
 
-    for (let i = 1; i <= totalPages; i++) {
+    if (currentPage - ellipsisThreshold <= 1) {
+      endPage = Math.min(totalPages, maxVisiblePages);
+    }
+
+    if (currentPage + ellipsisThreshold >= totalPages) {
+      startPage = Math.max(1, totalPages - maxVisiblePages + 1);
+    }
+
+    if (startPage > 1) {
       links.push(
-        <li
-          className={`page-item ${
-            currentPage === i ? "active" : ""
-          } cursor-pointer`}
-          key={i}
-        >
-          <a className="page-link" onClick={() => handlePageChange(i)}>
-            {i}
-          </a>
-        </li>
+        <Pagination.Ellipsis
+          key="ellipsis-start"
+          onClick={() => onPageChange(startPage - 1)}
+        />
       );
     }
+
+    for (let i = startPage; i <= endPage; i++) {
+      links.push(
+        <Pagination.Item
+          key={i}
+          active={i === currentPage}
+          onClick={() => onPageChange(i)}
+        >
+          {i}
+        </Pagination.Item>
+      );
+    }
+
+    if (endPage < totalPages) {
+      links.push(
+        <Pagination.Ellipsis
+          key="ellipsis-end"
+          onClick={() => onPageChange(endPage + 1)}
+        />
+      );
+    }
+
     return links;
   };
 
@@ -283,35 +312,19 @@ const AllProduct = () => {
                             )
                           );
                         })}
-                        {totalPages.toFixed(1)}
-                        <nav aria-label="Page navigation example">
-                          <ul className="pagination">
-                            <li className="page-item cursor-pointer">
-                              <a
-                                className="page-link "
-                                onClick={() =>
-                                  handlePageChange(currentPage - 1)
-                                }
-                                disabled={currentPage === 1}
-                              >
-                                Previous
-                              </a>
-                            </li>
-                            {renderPaginationLinks()}
-
-                            <li className="page-item cursor-pointer">
-                              <a
-                                className="page-link"
-                                onClick={() =>
-                                  handlePageChange(currentPage + 1)
-                                }
-                                disabled={currentPage === totalPages}
-                              >
-                                Next
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
+                        <Pagination>
+                          <Pagination.First onClick={() => onPageChange(1)} />
+                          <Pagination.Prev
+                            onClick={() => onPageChange(currentPage - 1)}
+                          />
+                          {renderPaginationLinks()}
+                          <Pagination.Next
+                            onClick={() => onPageChange(currentPage + 1)}
+                          />
+                          <Pagination.Last
+                            onClick={() => onPageChange(totalPages)}
+                          />
+                        </Pagination>
                       </div>
                     </div>
                     <div className="col-xxl-3 col-lg-3 col-md-3 col-sm-12 col-12 p-0 d-md-block d-none">
