@@ -36,7 +36,7 @@ const HomePage = () => {
       <HomeTop data={homeData?.sliders} />
       <HomeCategory data={homeData?.categories} />
       <HomeProduct data={homeData?.sections} />
-      <HomeCategory2 />
+      <HomeCategory2 data={homeData?.categories} />
     </>
   );
 };

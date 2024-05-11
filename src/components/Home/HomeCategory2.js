@@ -14,52 +14,23 @@ import ProductsCard from "../productsCard";
 // @ import Context
 import { CartContext } from "../../context/Context";
 
-const slicedItems = [
-  {
-    id: "1",
-    product: "FRUITS & VEGS",
-    name: "Great Value Ultra Strong Paper Towels, Splits Sheets",
-    price: "32.5",
-    discount: "45",
-    image: cardimg,
-  },
-  {
-    id: "2",
-    product: "FRUITS & VEGS",
-    name: "Great Value Ultra Strong Paper Towels, Splits Sheets",
-    price: "32.5",
-    discount: "45",
-    image: pimg1,
-  },
-  {
-    id: "3",
-    product: "FRUITS & VEGS",
-    name: "Great Value Ultra Strong Paper Towels, Splits Sheets",
-    price: "32.5",
-    discount: "45",
-    image: cardimg,
-  },
-  {
-    id: "4",
-    product: "FRUITS & VEGS",
-    name: "Great Value Ultra Strong Paper Towels, Splits Sheets",
-    price: "32.5",
-    discount: "45",
-    image: pimg3,
-  },
-  {
-    id: "5",
-    product: "FRUITS & VEGS",
-    name: "Great Value Ultra Strong Paper Towels, Splits Sheets",
-    price: "32.5",
-    discount: "45",
-    image: cardimg,
-  },
-];
-
-const HomeCategory2 = () => {
+const HomeCategory2 = ({ data }) => {
   const GlobelState = useContext(CartContext);
   const dispatch = GlobelState.dispatch;
+  const colors = {
+    0: "#BC5A3D",
+    1: "#FE9800",
+    2: "#6B6A56",
+    3: "#4FAD2E",
+  };
+  const bgColors = {
+    0: "#f3dfd9",
+    1: "#fbeccc",
+    2: "#e3e2dd",
+    3: "#d2ecda",
+  };
+  const firstThree = data?.slice(0, 3);
+  const firstFive = data?.slice(0, 5);
 
   return (
     <div>
@@ -88,10 +59,10 @@ const HomeCategory2 = () => {
                   pagination={false}
                   isResponsive={true}
                 >
-                  {slicedItems?.map((item) => {
+                  {firstFive?.map((item) => {
                     return (
                       <SwiperSlide key={item.id}>
-                        <SimpleCard items={item} />
+                        <SimpleCard item={item} />
                       </SwiperSlide>
                     );
                   })}
@@ -102,100 +73,42 @@ const HomeCategory2 = () => {
         </div>
       </section>
 
-      <section className="top-category  ">
-        <div className="container">
-          <div className="row  ">
-            <div className="col-lg-4 col-sm-12 ">
-              <div
-                className="banner_one home1_style athome7 color4 mb30"
-                style={{ backgroundColor: "#EBFFF1 " }}
-              >
-                <div className="thumb">
-                  <img className="float-end" src={lastimg} alt="pineapple" />
-                </div>
-                <div className="details">
-                  <h3 className="title" style={{ color: "#4FAD2E" }}>
-                    Small Appliances
-                  </h3>
-                  <p
-                    className="para heading-color"
-                    style={{ color: "#4FAD2E !important" }}
-                  >
-                    Upto 40% Off Kitchen Products.
-                  </p>
+      <section className="clothing-product pt0">
+        <div className="container  p-4 bgc-white bdrs6 position-relative">
+          <div className="row ">
+            {firstThree?.map((item, index) => (
+              <div className="col-lg-4 col-sm-12 mb-3" key={index}>
+                <div
+                  className="banner_one home1_style color2 home4_style h450"
+                  style={{ backgroundColor: bgColors[index] }}
+                >
+                  <div className="thumb">
+                    <img
+                      className="float-end"
+                      src={item.image}
+                      alt="smartwatch"
+                      style={{ mixBlendMode: "darken" }}
+                    />
+                  </div>
+                  <div className="details">
+                    <h3 className="title" style={{ color: colors[index] }}>
+                      {item.name}
+                    </h3>
 
-                  <Link
-                    to="#"
-                    className="shop_btn"
-                    style={{ color: "#4FAD2E", textDecoration: "none" }}
-                  >
-                    Shop Now
-                  </Link>
+                    <Link
+                      to="#"
+                      className="shop_btn"
+                      style={{
+                        color: item.bcolor,
+                        textDecoration: "none",
+                      }}
+                    >
+                      Shop Now
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-lg-4 col-sm-12 ">
-              <div
-                className="banner_one home1_style athome7 color4 mb30"
-                style={{ backgroundColor: "#EBF4FF " }}
-              >
-                <div className="thumb">
-                  <img className="float-end" src={lastimg1} alt="pineapple" />
-                </div>
-                <div className="details">
-                  <h3 className="title" style={{ color: "#4FAD2E" }}>
-                    Small Appliances
-                  </h3>
-                  <p
-                    className="para heading-color"
-                    style={{ color: "#4FAD2E !important" }}
-                  >
-                    Upto 40% Off Kitchen Products.
-                  </p>
-
-                  <Link
-                    to="#"
-                    className="shop_btn"
-                    style={{ color: "#4FAD2E", textDecoration: "none" }}
-                  >
-                    Shop Now
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-12 ">
-              <div
-                className="banner_one home1_style athome7 color5 mb30"
-                style={{ backgroundColor: "#FFF5EE " }}
-              >
-                <div className="thumb">
-                  <img
-                    className="float-end"
-                    src={lastimg2}
-                    alt="smartdevice.png"
-                  />
-                </div>
-                <div className="details">
-                  <h3 className="title" style={{ color: "#4FAD2E" }}>
-                    Small Appliances
-                  </h3>
-                  <p
-                    className="para heading-color"
-                    style={{ color: "#4FAD2E !important" }}
-                  >
-                    Upto 40% Off Kitchen Products.
-                  </p>
-
-                  <Link
-                    to="#"
-                    className="shop_btn"
-                    style={{ color: "#4FAD2E", textDecoration: "none" }}
-                  >
-                    Shop Now
-                  </Link>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

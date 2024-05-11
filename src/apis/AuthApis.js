@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const OnRegister = async (values) => {
-  console.log(values, "value");
   const formData = new FormData();
   formData.append("type", "phone");
   formData.append("country_code", values.code);
@@ -10,7 +9,6 @@ export const OnRegister = async (values) => {
   formData.append("password", values.password);
   formData.append("c_password", values.confirmPassword);
   formData.append("name", values.fullName);
-  console.log(formData, "formData");
   try {
     const response = await axios.post(
       `https://aquaconcepts78.fr/grazleBackend/api/register`,
@@ -47,12 +45,37 @@ export const onLogin = async (values) => {
     throw error;
   }
 };
-export const globalApi = async (api) => {
+// export const globalApi = async (api) => {
+//   try {
+//     const response = await axios.get(api, {
+//       headers: {
+//         "X-Requested-With": "XMLHttpRequest",
+//       },
+//     });
+//     return response.data;
+//   } catch (error) {
+//     // Handle error
+//     console.error("Error fetching data:", error);
+//     throw error; // Re-throw the error to propagate it
+//   }
+// };
+export const globalApi = async (api, method = "GET", data = null) => {
   try {
-    const response = await axios.get(api, {
+    const config = {
       headers: {
         "X-Requested-With": "XMLHttpRequest",
       },
+    };
+
+    if (method === "GET") {
+      config.params = data;
+    }
+
+    const response = await axios.request({
+      url: api,
+      method: method,
+      data: data,
+      ...config,
     });
     return response.data;
   } catch (error) {

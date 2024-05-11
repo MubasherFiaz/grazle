@@ -19,18 +19,18 @@ import "./App.css";
 import Roote from "./routes/Roote";
 
 function App() {
-  const { setIsLogin } = useAuth();
-  const navigate = useNavigate();
+  const { setIsLogin, setUserData } = useAuth();
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("login_token"));
-    console.log("data", storedData?.data);
+    setUserData(storedData?.data[0]);
+    console.log(storedData?.data[0]);
+
     if (storedData?.data) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
-      // navigate("/login");
     }
-  }, [navigate, setIsLogin]);
+  }, []);
 
   return (
     <>

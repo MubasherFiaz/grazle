@@ -6,6 +6,7 @@ export const useAuth = () => {
 };
 const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
+  const [userData, setUserData] = useState({});
   const [isSeller, setIsSeller] = useState(false);
   const [isuser, setIsUser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -13,6 +14,8 @@ const AuthProvider = ({ children }) => {
   const value = {
     isLogin,
     setIsLogin,
+    userData,
+    setUserData,
     isuser,
     setIsUser,
     isSeller,

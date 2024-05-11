@@ -1,25 +1,35 @@
 import React from "react";
 
-const SavedAddress = ({ palce, address, location }) => {
+const SavedAddress = ({
+  palce,
+  address,
+  location,
+  name,
+  number,
+  onSelectAddress,
+  handleDelete,
+  handleEdit,
+}) => {
   return (
     <div className="card shadow rounded-4 mb-3 p-4">
       <div className="d-flex justify-content-between mx-1 customaddressh0me">
-        <h3>{palce}</h3>
+        <h3>{palce.toUpperCase()}</h3>
         <input
           type="radio"
           name="check"
           id="check"
           className="bg-danger customradio"
           style={{ width: "30px", height: "30px" }}
+          onClick={onSelectAddress}
         />
       </div>
       <div className="d-flex my-2 customaddresshomeicon">
-        {palce === "Home" ? (
+        {palce.toLowerCase() === "home" ? (
           <i
             className="fa-light fa-house me-3"
             style={{ fontSize: "60px", color: "#777777" }}
           ></i>
-        ) : palce === "Appartment" ? (
+        ) : palce.toLowerCase() === "appartment" ? (
           <i
             className="fa-light fa-city me-3"
             style={{ fontSize: "60px", color: "#777777" }}
@@ -32,7 +42,9 @@ const SavedAddress = ({ palce, address, location }) => {
         )}
 
         <div className="customset">
-          <h4>Shipping Address </h4>
+          <h4>
+            {name} ({number})
+          </h4>
           <p style={{ fontSize: "16px", color: "#777777" }}>{address}</p>
         </div>
       </div>
@@ -46,12 +58,14 @@ const SavedAddress = ({ palce, address, location }) => {
         </div>
         <div className="d-flex customaddressicon">
           <i
-            className="fa-regular fa-pen-to-square text-success p-md-2 p-1 rounded-3 mx-2 align-content-center"
+            className="fa-regular fa-pen-to-square text-success p-md-2 p-1 rounded-3 mx-2 align-content-center cursor-pointer"
             style={{ fontSize: "20px", backgroundColor: "#5EF7000A" }}
+            onClick={handleEdit}
           ></i>
           <i
-            className="fa-solid fa-trash-can text-danger mx-2 p-md-2 p-1 rounded-3 align-content-center"
+            className="fa-solid fa-trash-can text-danger mx-2 p-md-2 p-1 rounded-3 align-content-center cursor-pointer"
             style={{ fontSize: "20px", backgroundColor: "#F700000A" }}
+            onClick={handleDelete}
           ></i>
         </div>
       </div>

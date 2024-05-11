@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const SimpleCard = ({ items }) => {
-  const item = items;
+const SimpleCard = ({ item }) => {
   return (
     // <div className="card ">
     //   <div className="shop_item home7_style small_style bdrtrb1 px-2 px-sm-3  ">
@@ -22,12 +21,12 @@ const SimpleCard = ({ items }) => {
     <div className="best-productCard">
       <div className="best-productCard-Header">
         <div className="cardImage">
-          <img src={item.image} alt="Best" />
+          <img src={item?.image} alt="Best" />
         </div>
       </div>
       <div className="best-productCard-Body">
         <div className="title ">
-          <h3>{item.product}</h3>
+          <h3>{item?.name}</h3>
         </div>
         <div className="desc">
           <Link to="#">{item.deal || "Special Deal"}</Link>

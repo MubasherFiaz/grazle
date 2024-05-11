@@ -1,8 +1,126 @@
-import React from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import UserSiderBAr from "../shared/UserSiderBAr";
 import ToggleSideBar from "../shared/ToggleSideBar";
+import { globalApi } from "../apis/AuthApis";
+import { useAuth } from "../context/AuthProvider";
+import SavedAddress from "../components/savedAddress";
+import AddressForm from "../components/addressForm";
+import { toast } from "react-toastify";
+import Button from "react-bootstrap/Button";
+import { Modal } from "react-bootstrap";
 
 const ManageAddress = () => {
+  const [addressData, setAddressData] = useState(null);
+  const [selectedData, setSelectedAddress] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editData, setEditData] = useState(null);
+  const [showDelModal, setShowDelModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+  const { setIsLoading, userData, setUserData } = useAuth();
+
+  const getAddressData = async () => {
+    const formData = new FormData();
+    formData.append("id", userData.id);
+    try {
+      setIsLoading(true);
+      const data = await globalApi(
+        "https://aquaconcepts78.fr/grazleBackend/api/get_address",
+        "POST",
+        formData
+      );
+      setAddressData(data.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error:", error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getAddressData();
+    };
+    const storedData = JSON.parse(localStorage.getItem("login_token"));
+    if (storedData) {
+      setUserData(storedData?.data[0]);
+    }
+    fetchData();
+  }, []);
+
+  const AddAddress = async (data) => {
+    const formData = new FormData();
+    formData.append("user_id", userData.id);
+    formData.append("name", data.firstName + data.lastName);
+    formData.append("mobile", data.contactNumber);
+    formData.append("address", data.address);
+    formData.append("pincode", data.zipCode);
+    formData.append("country", data.country);
+    formData.append("city_name", data.city);
+    formData.append("state", data.state);
+    formData.append("type", data.type);
+    try {
+      setIsLoading(true);
+      const response = await globalApi(
+        "https://aquaconcepts78.fr/grazleBackend/api/add_address",
+        "POST",
+        formData
+      );
+      setIsLoading(false);
+      await getAddressData();
+      toast.success(response.message);
+      return response.data;
+    } catch (error) {
+      console.error("Error creating address:", error);
+      setIsLoading(false);
+      toast.error(error);
+      throw error;
+    }
+  };
+  // const UpdateAddress = async (addressId, updatedAddressData) => {
+  //   try {
+  //     setIsLoading(true);
+  //     const formData = new FormData();
+  //     formData.append("id", addressId);
+  //     // Add other fields to update if needed
+  //     const response = await globalApi(
+  //       "https://aquaconcepts78.fr/grazleBackend/api/update_address",
+  //       "POST",
+  //       formData
+  //     );
+  //     setIsLoading(false);
+  //     await getAddressData();
+  //     toast.success(response.message);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error("Error updating address:", error);
+  //     setIsLoading(false);
+  //     toast.error(error);
+  //     throw error;
+  //   }
+  // };
+  const DeleteAddress = async (addressId) => {
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append("user_id", userData.id);
+      formData.append("id", addressId);
+      const response = await globalApi(
+        "https://aquaconcepts78.fr/grazleBackend/api/delete_address",
+        "POST",
+        formData
+      );
+      setIsLoading(false);
+      await getAddressData();
+      toast.success(response.message);
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting address:", error);
+      setIsLoading(false);
+      toast.error(error);
+      throw error;
+    }
+  };
+
   return (
     <div>
       <section className="our-dashbord dashbord p-0 mb-3">
@@ -28,187 +146,39 @@ const ManageAddress = () => {
             <div className="col-lg-9 col-xl-9">
               <div className="row">
                 <div className="col-12 mb-4">
-                  <div className="card shadow p-4">
-                    <div className="   card-list d-flex justify-content-between align-items-center">
-                      <div>
-                        <h3>Bessie Cooper</h3>
-                        <p>256 Royal Ln. Mesa, New Jersery 6777</p>
-                      </div>
-                      <div>
-                        <i className="fa-solid fa-pen-to-square edit me-3 mb-2 mb-md-0"></i>
-                        <i className="fa-solid fa-trash-can del"></i>
-                      </div>
-                    </div>
-                    <hr />
-                    <div className="card-list d-flex justify-content-between align-items-center">
-                      <div>
-                        <h3>Bessie Cooper</h3>
-                        <p>256 Royal Ln. Mesa, New Jersery 6777</p>
-                      </div>
-                      <div>
-                        <i className="fa-solid fa-pen-to-square edit me-3 mb-2 mb-md-0"></i>
-                        <i className="fa-solid fa-trash-can del"></i>
-                      </div>
-                    </div>
-                  </div>
+                  {addressData?.map((item) => (
+                    <Fragment key={item.id}>
+                      <SavedAddress
+                        palce={item.type}
+                        address={item.address}
+                        location={item.city}
+                        name={item.name.toUpperCase()}
+                        number={item.mobile}
+                        onSelectAddress={() => {
+                          setSelectedAddress(item.address);
+                        }}
+                        handleDelete={() => {
+                          setDeleteId(item.id);
+                          setShowDelModal(true);
+                        }}
+                        handleEdit={() => {
+                          setEditData(item);
+                          console.log(item, "item");
+                          setShowEditModal(true);
+                        }}
+                      />
+                    </Fragment>
+                  ))}
                 </div>
                 <div className="col-12">
                   <div className="card shadow p-4">
-                    <div className="account_details_page form_grid">
-                      <h2 className="title mb30">Add New Address</h2>
-
-                      <form
-                        className="contact_form"
-                        name="contact_form"
-                        action="#"
-                        method="post"
-                        novalidate
-                      >
-                        <div className="row">
-                          <div className="col-md-6">
-                            <div className="form-group mb-4">
-                              <label className="form-label">First Name</label>
-                              <input
-                                className="form-control"
-                                type="text"
-                                placeholder="Your Name"
-                              />
-                            </div>
-                          </div>
-                          <div className="col-md-6">
-                            <div className="form-group mb-4">
-                              <label className="form-label">Last Name</label>
-                              <input
-                                className="form-control"
-                                type="text"
-                                placeholder="Your Name"
-                              />
-                            </div>
-                          </div>
-
-                          <div className="col-md-12">
-                            <div className="form-group mb-4">
-                              <label className="form-label">
-                                Company Name (optional)
-                              </label>
-                              <input
-                                className="form-control"
-                                type="number"
-                                placeholder="Company Name "
-                              />
-                            </div>
-                          </div>
-
-                          <div className="col-md-12">
-                            <div className="form-group mb-4">
-                              <label className="form-label">Country</label>
-                              <select
-                                className="form-select "
-                                aria-label="Default select example"
-                              >
-                                <option selected>Country</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                              </select>
-                            </div>
-                          </div>
-
-                          <div className="col-md-12">
-                            <div className="form-group mb-4">
-                              <label className="form-label">
-                                Street Address
-                              </label>
-                              <input
-                                className="form-control"
-                                type="number"
-                                placeholder="Street Address "
-                              />
-                            </div>
-                          </div>
-                          <div className="col-md-12">
-                            <div className="form-group mb-4">
-                              <label className="form-label">City *</label>
-                              <select
-                                className="form-select "
-                                aria-label="Default select example"
-                              >
-                                <option selected>City </option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="col-md-12">
-                            <div className="form-group mb-4">
-                              <label className="form-label">State</label>
-                              <select
-                                className="form-select "
-                                aria-label="Default select example"
-                              >
-                                <option selected>State</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                              </select>
-                            </div>
-                          </div>
-
-                          <div className="col-md-12">
-                            <div className="form-group mb-4">
-                              <label className="form-label">Zip Code *</label>
-                              <input
-                                className="form-control"
-                                type="number"
-                                placeholder="Zip Code  "
-                              />
-                            </div>
-                          </div>
-
-                          <div className="col-md-12">
-                            <div className="form-group mb-4">
-                              <label className="form-label">Email</label>
-                              <input
-                                className="form-control email"
-                                type="email"
-                                placeholder="Your Email"
-                              />
-                            </div>
-                          </div>
-                          <div className="col-md-12">
-                            <div className="form-group mb-4">
-                              <label className="form-label">Phone Number</label>
-                              <input
-                                className="form-control"
-                                type="number"
-                                placeholder="Phone Number"
-                              />
-                            </div>
-                          </div>
-                          <div className="col-md-12">
-                            <div className="form-group mb-4">
-                              <label className="form-label">Gender</label>
-                              <select
-                                className="form-select "
-                                aria-label="Default select example"
-                              >
-                                <option selected>Gender</option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="col-sm-12">
-                            <div className="form-group d-flex mb0">
-                              <button
-                                type="button"
-                                className="btn btn-thm1111 me-3"
-                              >
-                                Add Address
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
+                    <AddressForm
+                      formType="Add New Address"
+                      handleClick={(values) => {
+                        AddAddress(values);
+                      }}
+                      buttonText="Add New"
+                    />
                   </div>
                 </div>
               </div>
@@ -216,6 +186,57 @@ const ManageAddress = () => {
           </div>
         </div>
       </section>
+      <Modal
+        show={showEditModal}
+        onHide={() => {
+          setShowEditModal(false);
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Address</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <AddressForm
+            formType="Edit Address"
+            handleClick={(values) => {
+              // UpdateAddress(values);
+              console.log(values);
+            }}
+            initialValues={editData}
+            buttonText="Update"
+          />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showDelModal}
+        onHide={() => {
+          setShowDelModal(false);
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Address</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you Sure yo want to Delete Address !</Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowDelModal(false);
+            }}
+          >
+            Close
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              DeleteAddress(deleteId);
+              setShowDelModal(false);
+            }}
+          >
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

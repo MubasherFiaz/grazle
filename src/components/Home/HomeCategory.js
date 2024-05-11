@@ -91,6 +91,7 @@ const HomeCategory = ({ data }) => {
                                   className="float-end"
                                   src={item.image}
                                   alt="smartwatch"
+                                  style={{ mixBlendMode: "darken" }}
                                 />
                               </div>
                               <div className="details">
