@@ -96,3 +96,17 @@ a {
   font-weight: 600;
   text-transform: capitalize;
 }
+/* categoryCardHomePage */
+
+@media screen and (max-width: 992px) {
+  .categoryCardHomePage {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+@media screen and (max-width: 992px) {
+  .categoryCardHomePage {
+    width: 80px !important;
+    height: 80px !important;
+  }
+}

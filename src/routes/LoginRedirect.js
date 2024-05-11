@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 const LoginRedirect = ({ isLoggedIn, children }) => {
   if (isLoggedIn) {
-    return <Navigate to="/product" replace />;
+    return <Navigate to="/" replace />;
   }
   return children;
 };

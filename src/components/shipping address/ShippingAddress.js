@@ -13,12 +13,13 @@ import Input from "../input/input";
 import * as Yup from "yup";
 
 const ShippingAddress = () => {
-  var TotalValue = 0;
+  const [grandTotal, setGrandTotal] = useState(0);
+  let TotalValue = 0;
+  let totalValuebeforeDisscount = 0;
   useEffect(() => {
     setGrandTotal(TotalValue);
   }, [TotalValue]);
 
-  const [grandTotal, setGrandTotal] = useState(0);
   const GlobelState = useContext(CartContext);
   const state = GlobelState.state;
 
@@ -236,7 +237,7 @@ const ShippingAddress = () => {
                           type="button"
                           class="btn btn-thm1111 me-3 w-100"
                         >
-                          ${grandTotal}
+                          ₹{grandTotal}
                         </button>
                       </div>
 
@@ -293,7 +294,13 @@ const ShippingAddress = () => {
               >
                 <h6 class="title text-center">Order Summury</h6>
                 {state?.map((item) => {
-                  TotalValue = TotalValue + Number(item.price) * item.quantity;
+                  TotalValue =
+                    TotalValue +
+                    Number(item?.min_max_price?.max_special_price) *
+                      item.quantity;
+                  totalValuebeforeDisscount =
+                    totalValuebeforeDisscount +
+                    Number(item?.min_max_price?.max_price) * item.quantity;
                   return (
                     <div class="d-flex align-items-center">
                       <div class="me-2">
@@ -307,7 +314,7 @@ const ShippingAddress = () => {
                         <h5>{item.name}</h5>
                         <div className="d-flex justify-content-between">
                           <p>White</p>
-                          <p>${item.price}</p>
+                          <p>₹{item?.min_max_price?.max_special_price}</p>
                         </div>
                       </div>
                     </div>
@@ -317,16 +324,20 @@ const ShippingAddress = () => {
                 <div className="cart-total">
                   <h4 class="title mt-4">Cart Total</h4>
                   <div className="d-flex justify-content-between align-items-start">
+                    <label></label>
+                    <p>₹{totalValuebeforeDisscount}</p>
+                  </div>
+                  <div className="d-flex justify-content-between align-items-start">
                     <label>Shipping</label>
                     <p>Free</p>
                   </div>
                   <div className="d-flex justify-content-between align-items-start border-bottom">
                     <label>Discount</label>
-                    <p>00</p>
+                    <p>₹{totalValuebeforeDisscount - TotalValue}</p>
                   </div>
-                  <div className="d-flex justify-content-between align-items-start">
+                  <div className="d-flex justify-content-between align-items-start mt-2">
                     <label>Cart Total</label>
-                    <p>${TotalValue}</p>
+                    <p>₹{TotalValue}</p>
                   </div>
                 </div>
               </div>

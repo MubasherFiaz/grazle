@@ -9,10 +9,13 @@ import { useAuth } from "../../context/AuthProvider";
 const HomeProduct = ({ data }) => {
   const GlobelState = useContext(CartContext);
   const dispatch = GlobelState.dispatch;
-  const { islogin } = useAuth();
+  const { isLogin } = useAuth();
   const handleAddtoCart = (item) => {
-    if (islogin) {
+    if (isLogin) {
       dispatch({ type: "ADD", payload: item });
+      toast.success("Product Added to Cart", {
+        autoClose: 3000,
+      });
     } else {
       toast.error("Login First to Add Product", {
         autoClose: 3000,

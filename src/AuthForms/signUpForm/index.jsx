@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 // @ import dependencies
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // @ import components
 import Input from "../../components/input/input";
 // @ import media
@@ -9,13 +9,25 @@ import Password from "../../assets/svg/password.svg";
 import Profile from "../../assets/svg/profile.svg";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import CountryCodeList from "../../components/counrtyCodeList";
+// @ import apis
+import { OnRegister } from "../../apis/AuthApis";
+import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthProvider";
 
 const SignUp = () => {
+  const [code, setCode] = useState("");
+  const [codeErr, setCodeErr] = useState(false);
+  const { setIsLoading } = useAuth();
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     fullName: Yup.string()
       .required("Required")
       .min(3, "Enter Minimum 3 digits"),
+    number: Yup.number().required("Required").min(3, "Enter Minimum 3 digits"),
     email: Yup.string().email("Invalid email address").required("Required"),
+
     password: Yup.string()
       .required("Required")
       .min(3, "Enter Minimum 3 digits"),
@@ -26,8 +38,26 @@ const SignUp = () => {
         return this.parent.password === value;
       }),
   });
-  const handleSignup = (values) => {
-    console.log("login", values);
+  const handleSignup = async (values) => {
+    if (code) {
+      setCodeErr(false);
+      const value = {
+        ...values,
+        code: code,
+      };
+      setIsLoading(true);
+      let registerResponse = await OnRegister(value);
+      if (registerResponse.message === "Registered Successfully") {
+        setIsLoading(false);
+        toast.success(registerResponse.message);
+        navigate("/");
+      } else {
+        setIsLoading(false);
+        toast.error(registerResponse.message);
+      }
+    } else {
+      setCodeErr(true);
+    }
   };
   return (
     <>
@@ -39,6 +69,7 @@ const SignUp = () => {
           email: "",
           password: "",
           confirmPassword: "",
+          number: "",
         }}
         validationSchema={validationSchema}
         onSubmit={handleSignup}
@@ -64,6 +95,19 @@ const SignUp = () => {
                 onBlur={handleBlur}
                 value={values.fullName}
                 isError={errors.fullName && touched.fullName && errors.fullName}
+              />
+            </div>
+            <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+              <Input
+                id="number"
+                type="number"
+                name="number"
+                isbeforeImg={Profile}
+                placeholder="Enter Mobile Number"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.number}
+                isError={errors.number && touched.number && errors.number}
               />
             </div>
             <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
@@ -109,6 +153,13 @@ const SignUp = () => {
                   touched.confirmPassword &&
                   errors.confirmPassword
                 }
+              />
+            </div>
+            <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto mb-3">
+              <CountryCodeList
+                name="country"
+                setCode={setCode}
+                isError={codeErr}
               />
             </div>
             <div className="col-xxl-10 col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto text-start mb-4">

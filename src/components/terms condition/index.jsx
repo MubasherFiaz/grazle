@@ -21,7 +21,7 @@ const TermsCondition = () => {
             </p>
           </div>
           <div className="term-box">
-            <h2>grazle</h2>
+            <h2>Licence</h2>
             <p>
               At vero eos et accusamus et iusto odio dignissimos ducimus qui
               blanditiis praesentium voluptatum deleniti atque corrupti quos
@@ -34,7 +34,7 @@ const TermsCondition = () => {
             </p>
           </div>
           <div className="term-box">
-            <h2>grazle</h2>
+            <h2>Cookies</h2>
             <p>
               At vero eos et accusamus et iusto odio dignissimos ducimus qui
               blanditiis praesentium voluptatum deleniti atque corrupti quos
@@ -47,7 +47,7 @@ const TermsCondition = () => {
             </p>
           </div>
           <div className="term-box">
-            <h2>grazle</h2>
+            <h2>Content Liability</h2>
             <p>
               At vero eos et accusamus et iusto odio dignissimos ducimus qui
               blanditiis praesentium voluptatum deleniti atque corrupti quos

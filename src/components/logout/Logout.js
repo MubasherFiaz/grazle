@@ -1,8 +1,14 @@
 import React from "react";
 import UserSiderBAr from "../../shared/UserSiderBAr";
 import ToggleSideBar from "../../shared/ToggleSideBar";
+import { useNavigate } from "react-router-dom";
 
 const Logout = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("login_token");
+    navigate("/login");
+  };
   return (
     <div>
       <section class="our-dashbord dashbord" style={{ padding: "0" }}>
@@ -31,7 +37,11 @@ const Logout = () => {
                     <p>Are you sure you want to log uot?</p>
 
                     <div class="form-group d-flex mb0">
-                      <button type="button" class="btn btn-thm1111 me-3">
+                      <button
+                        type="button"
+                        class="btn btn-thm1111 me-3"
+                        onClick={handleLogout}
+                      >
                         Yes, Logout
                       </button>
                     </div>
