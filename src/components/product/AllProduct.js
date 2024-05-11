@@ -35,7 +35,6 @@ const AllProduct = () => {
       const data = await globalApi(
         `https://aquaconcepts78.fr/grazleBackend/api/products?page=${page}`
       );
-      console.log("Product Data", data.data);
       setAllProductsData(data.data);
       setTotalPages(Math.ceil(data.data.products.total / 12));
       setIsLoading(false);

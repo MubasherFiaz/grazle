@@ -29,7 +29,7 @@ const Plans = () => {
     };
     fetchData();
   }, []);
-  console.log(planData);
+
   return (
     <section id="premium-plans">
       <div className="container">

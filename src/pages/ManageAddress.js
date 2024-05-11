@@ -163,7 +163,6 @@ const ManageAddress = () => {
                         }}
                         handleEdit={() => {
                           setEditData(item);
-                          console.log(item, "item");
                           setShowEditModal(true);
                         }}
                       />
