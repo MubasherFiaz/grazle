@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // @ import styles
 import "./styles.css";
 import StarRating from "../../shared/StarRating";
+import { useAuth } from "../../context/AuthProvider";
+import { globalApi } from "../../apis/AuthApis";
+import ProductsCard from "../productsCard";
+import { useParams } from "react-router-dom";
 
 const ProductInfo = () => {
+  const { productId } = useParams();
+  const [productDetail, setProductDetail] = useState(null);
+  const { setIsLoading } = useAuth();
+
+  const geProductDetailData = async () => {
+    try {
+      setIsLoading(true);
+      const data = await globalApi(
+        `https://aquaconcepts78.fr/grazleBackend/api/product_details_by_id/${productId}`
+      );
+      setProductDetail(data.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error:", error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await geProductDetailData();
+    };
+    fetchData();
+  }, []);
+
   return (
     <section id="product-info">
       <div className="container">
-        <div className="main-product-image mb-5"></div>
+        <div className="main-product-image mb-5 d-flex justify-content-center align-items-center">
+          <img src={productDetail?.product_image} alt="Product Image" />
+        </div>
         <nav>
           <div
             className="nav nav-tabs justify-content-center product-tabpane"
@@ -36,7 +67,7 @@ const ProductInfo = () => {
               aria-controls="nav-profile"
               aria-selected="false"
             >
-              Profile
+              product info
             </button>
             <button
               className="nav-link"
@@ -62,14 +93,12 @@ const ProductInfo = () => {
             >
               <div className="product-content">
                 <div className="mb-xl-5 mb-3">
-                  <p>
-                    Sed commodo aliquam dui ac porta. Fusce ipsum felis,
-                    imperdiet at posuere ac, viverra at mauris. Maecenas
-                    tincidunt ligula a sem vestibulum pharetra. Maecenas auctor
-                    tortor lacus, nec laoreet nisi porttitor vel. Etiam
-                    tincidunt metus vel dui interdum sollicitudin. Mauris sem
-                    ante, vestibulum nec orci vitae, aliquam mollis lacus.
-                  </p>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: productDetail?.product?.description,
+                    }}
+                  />
+
                   <p>
                     Sed et condimentum arcu, id molestie tellus. Nulla facilisi.
                     Nam scelerisque vitae justo a convallis. Morbi urna ipsum,
@@ -461,6 +490,19 @@ const ProductInfo = () => {
                 <p>12 month ago</p>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="mt-4">
+          <h3>More from frequently Our Store</h3>
+          <div className="row">
+            {productDetail?.related_products?.product.map((item) => (
+              <div
+                className="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mb-3"
+                key={item.id}
+              >
+                <ProductsCard item={item} />
+              </div>
+            ))}
           </div>
         </div>
       </div>

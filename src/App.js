@@ -23,7 +23,6 @@ function App() {
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("login_token"));
     setUserData(storedData?.data[0]);
-    console.log(storedData?.data[0]);
 
     if (storedData?.data) {
       setIsLogin(true);

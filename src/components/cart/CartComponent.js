@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import object from "../../assets/image/Rectangle 1951.png";
 import { CartContext } from "../../context/Context";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const items = [
   {
     id: "1",
@@ -263,7 +264,7 @@ const CartComponent = () => {
                       if (state.length > 0) {
                         navigate("/alladdress");
                       } else {
-                        console.log("Please Buy Product");
+                        toast.error("First Add to Cart Product");
                       }
                     }}
                   >

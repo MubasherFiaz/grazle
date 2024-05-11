@@ -5,8 +5,10 @@ import StarRating from "../../shared/StarRating";
 import Heart from "../../assets/svg/heart.svg";
 // @ import css
 import "./index.css";
+import { useNavigate } from "react-router-dom";
 
 const ProductsCard = ({ item, onClick }) => {
+  const navigate = useNavigate();
   return (
     <div className="cardWrapper">
       <div className="cardHeader">
@@ -42,6 +44,14 @@ const ProductsCard = ({ item, onClick }) => {
         </div>
       </div>
       <div className="cardFooter">
+        <a
+          onClick={() => {
+            navigate(`/product-info/${item?.id}`);
+          }}
+          className="cursor-pointer"
+        >
+          view details
+        </a>
         <button className="cardButton btn btn-light-green" onClick={onClick}>
           <span class="cart-text">Add to Cart</span>
           <span class="cart-icon">

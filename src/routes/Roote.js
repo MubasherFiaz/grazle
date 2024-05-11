@@ -38,6 +38,7 @@ import SignUp from "../AuthForms/signUpForm";
 import SellerForm from "../AuthForms/SellerForm";
 import MainLayout from "../layout/MainLayout";
 import AuthLayout from "../layout/AuthLayout";
+import { useAuth } from "../context/AuthProvider";
 
 const Roote = () => {
   const [isLoggedIn, setisLoggedIn] = useState(null);
@@ -50,6 +51,17 @@ const Roote = () => {
       setisLoggedIn(false);
     }
   }
+  const { setIsLogin, setUserData } = useAuth();
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("login_token"));
+    setUserData(storedData?.data[0]);
+
+    if (storedData?.data) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
 
   useEffect(() => {
     set_login_status();
@@ -83,7 +95,7 @@ const Roote = () => {
         <Route path="/order1" element={<Order />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/termscondition" element={<TermsCondition />} />
-        <Route path="/product-info" element={<ProductInfo />} />
+        <Route path="/product-info/:productId" element={<ProductInfo />} />
         <Route path="/plans" element={<Plans />} />
         <Route path="/credit" element={<Credit />} />
         {/* <Route

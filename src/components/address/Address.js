@@ -1,14 +1,21 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SavedAddress from "../savedAddress";
 import { useAuth } from "../../context/AuthProvider";
 import { globalApi } from "../../apis/AuthApis";
+import { toast } from "react-toastify";
+import { CartContext } from "../../context/Context";
 
 const Address = () => {
   const [addressData, setAddressData] = useState(null);
   const [selectedData, setSelectedAddress] = useState(null);
   const { setIsLoading, userData } = useAuth();
-  const navigate = useNavigate();
+
+  const GlobelState = useContext(CartContext);
+  const state = GlobelState.state;
+
+  const idsString = state.map((product) => product.id).join(",");
+  const quantity = state.map((product) => product.quantity).join(",");
 
   const getAddressData = async () => {
     const formData = new FormData();
@@ -34,6 +41,30 @@ const Address = () => {
     };
     fetchData();
   }, []);
+
+  const handleCheckOut = async () => {
+    const formData = new FormData();
+    formData.append("user_id", userData.id);
+    formData.append("address_id", selectedData?.id);
+    formData.append("mobile", selectedData?.mobile);
+    formData.append("product_variant_id", idsString);
+    formData.append("quantity", quantity);
+    try {
+      setIsLoading(true);
+      const response = await globalApi(
+        "https://aquaconcepts78.fr/grazleBackend/api/place-order",
+        "POST",
+        formData
+      );
+      setIsLoading(false);
+      toast.success(response.data.message);
+      return response.data;
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error);
+      throw error;
+    }
+  };
   return (
     <div className="container">
       <div className="row">
@@ -68,7 +99,7 @@ const Address = () => {
                 name={item.name.toUpperCase()}
                 number={item.mobile}
                 onSelectAddress={() => {
-                  setSelectedAddress(item.address);
+                  setSelectedAddress(item);
                 }}
               />
             </Fragment>
@@ -94,7 +125,7 @@ const Address = () => {
             disabled={!selectedData}
             onClick={() => {
               if (selectedData) {
-                navigate("/shippingaddress");
+                handleCheckOut();
               }
             }}
           >

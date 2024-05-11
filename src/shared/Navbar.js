@@ -18,7 +18,6 @@ import DropDownMenu from "../components/dropdownMenu";
 import { useAuth } from "../context/AuthProvider";
 const Navbar = () => {
   const { isLogin } = useAuth();
-  console.log(isLogin, "isLogin");
   const GlobelState = useContext(CartContext);
   const badge = GlobelState.state.length;
   return (
@@ -35,7 +34,7 @@ const Navbar = () => {
                   data-bs-target="#offcanvasExample"
                   aria-controls="offcanvasExample"
                 >
-                  <img src={Menu} />
+                  <img src={Menu} alt="menu" />
                 </span>
                 <img className="ms-2" src={logo} alt="" />
               </div>
@@ -194,14 +193,23 @@ const Navbar = () => {
                           style={{ width: "250px", borderRadius: "10px" }}
                         >
                           <DropDownMenu label="Your Account" link="/user" />
-                          <DropDownMenu label="Favourites" />
-                          <DropDownMenu label="Manage Addresses" />
-                          <DropDownMenu label="Credit Limit" />
-                          <DropDownMenu label="Grazzle Membership" />
+                          <DropDownMenu label="Favourites" link="/favourite" />
+                          <DropDownMenu
+                            label="Manage Addresses"
+                            link="/address"
+                          />
+                          <DropDownMenu label="Credit Limit" link="/credit" />
+                          <DropDownMenu
+                            label="Grazzle Membership"
+                            link="/plans"
+                          />
                           <DropDownMenu label="Notification Settings" />
                           <p className="m-0 p-2">Grazle</p>
                           <DropDownMenu label="FAQs" />
-                          <DropDownMenu label="Terms of Use" />
+                          <DropDownMenu
+                            label="Terms of Use"
+                            link="/termscondition"
+                          />
                           <DropDownMenu label="Privacy Policy" />
                         </ul>
                       </div>
