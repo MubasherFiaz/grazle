@@ -36,6 +36,8 @@ export const Context = ({ children }) => {
         );
 
         return tempstate3;
+      case "RESET":
+        return [];
       default:
         return state;
     }

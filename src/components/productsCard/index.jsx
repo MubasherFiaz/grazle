@@ -26,7 +26,14 @@ const ProductsCard = ({ item, onClick }) => {
       </div>
       <div className="cardBody">
         <div className="productName">
-          <h3>{item?.name}</h3>
+          <h3
+            onClick={() => {
+              navigate(`/product-info/${item?.id}`);
+            }}
+            className="cursor-pointer"
+          >
+            {item?.name}
+          </h3>
         </div>
         <div className="productRating">
           <StarRating />
@@ -44,14 +51,6 @@ const ProductsCard = ({ item, onClick }) => {
         </div>
       </div>
       <div className="cardFooter">
-        <a
-          onClick={() => {
-            navigate(`/product-info/${item?.id}`);
-          }}
-          className="cursor-pointer"
-        >
-          view details
-        </a>
         <button className="cardButton btn btn-light-green" onClick={onClick}>
           <span class="cart-text">Add to Cart</span>
           <span class="cart-icon">

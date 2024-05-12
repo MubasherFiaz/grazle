@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // @ import styles
 import "./styles.css";
 import StarRating from "../../shared/StarRating";
@@ -6,11 +6,16 @@ import { useAuth } from "../../context/AuthProvider";
 import { globalApi } from "../../apis/AuthApis";
 import ProductsCard from "../productsCard";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { CartContext } from "../../context/Context";
 
 const ProductInfo = () => {
   const { productId } = useParams();
   const [productDetail, setProductDetail] = useState(null);
-  const { setIsLoading } = useAuth();
+  const { setIsLoading, isLogin } = useAuth();
+
+  const GlobelState = useContext(CartContext);
+  const dispatch = GlobelState.dispatch;
 
   const geProductDetailData = async () => {
     try {
@@ -33,113 +38,31 @@ const ProductInfo = () => {
     fetchData();
   }, []);
 
+  const handleAddtoCart = (item) => {
+    if (isLogin) {
+      dispatch({ type: "ADD", payload: item });
+      toast.success("Product Added to Cart", {
+        autoClose: 3000,
+      });
+    } else {
+      toast.error("Login First to Add Product", {
+        autoClose: 3000,
+      });
+    }
+  };
+
   return (
     <section id="product-info">
       <div className="container">
         <div className="main-product-image mb-5 d-flex justify-content-center align-items-center">
           <img src={productDetail?.product_image} alt="Product Image" />
         </div>
-        <nav>
+        <div className="mb-xl-5 mb-3">
           <div
-            className="nav nav-tabs justify-content-center product-tabpane"
-            id="nav-tab"
-            role="tablist"
-          >
-            <button
-              className="nav-link active"
-              id="nav-home-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-home"
-              type="button"
-              role="tab"
-              aria-controls="nav-home"
-              aria-selected="true"
-            >
-              Home
-            </button>
-            <button
-              className="nav-link"
-              id="nav-profile-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-profile"
-              type="button"
-              role="tab"
-              aria-controls="nav-profile"
-              aria-selected="false"
-            >
-              product info
-            </button>
-            <button
-              className="nav-link"
-              id="nav-contact-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-contact"
-              type="button"
-              role="tab"
-              aria-controls="nav-contact"
-              aria-selected="false"
-            >
-              Contact
-            </button>
-          </div>
-        </nav>
-        <div className="tab-content pt-3" id="nav-tabContent">
-          <div className="col-xxl-8 col-xl-8 col-lg-10 col-sm-12 col-12">
-            <div
-              className="tab-pane fade show active"
-              id="nav-home"
-              role="tabpanel"
-              aria-labelledby="nav-home-tab"
-            >
-              <div className="product-content">
-                <div className="mb-xl-5 mb-3">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: productDetail?.product?.description,
-                    }}
-                  />
-
-                  <p>
-                    Sed et condimentum arcu, id molestie tellus. Nulla facilisi.
-                    Nam scelerisque vitae justo a convallis. Morbi urna ipsum,
-                    placerat quis commodo quis, egestas elementum leo. Donec
-                    convallis mollis enim. Aliquam id mi quam. Phasellus nec
-                    fringilla elit. Nulla mauris tellus, feugiat quis pharetra
-                    sed, gravida ac dui. Sed iaculis, metus faucibus elementum
-                    tincidunt, turpis mi viverra velit, pellentesque tristique
-                    neque mi eget nulla. Proin luctus elementum neque et
-                    pharetra. Nulla mauris tellus, feugiat quis pharetra sed,
-                    gravida ac dui. Sed iaculis, metus faucibus elementum
-                    tincidunt, turpis mi viverra velit, pellentesque tristique
-                    neque mi eget nulla. Proin luctus elementum neque et
-                    pharetra.
-                  </p>
-                </div>
-
-                <ul className="m-0 p-0">
-                  <li>100 g of fresh leaves provides.</li>
-                  <li>100 g of fresh leaves provides.</li>
-                  <li>100 g of fresh leaves provides.</li>
-                </ul>
-              </div>
-            </div>
-            <div
-              className="tab-pane fade"
-              id="nav-profile"
-              role="tabpanel"
-              aria-labelledby="nav-profile-tab"
-            >
-              content-2
-            </div>
-            <div
-              className="tab-pane fade"
-              id="nav-contact"
-              role="tabpanel"
-              aria-labelledby="nav-contact-tab"
-            >
-              content-3
-            </div>
-          </div>
+            dangerouslySetInnerHTML={{
+              __html: productDetail?.product?.description,
+            }}
+          />
         </div>
         <div className="review-wrapper">
           <div className="review-head">
@@ -500,7 +423,13 @@ const ProductInfo = () => {
                 className="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mb-3"
                 key={item.id}
               >
-                <ProductsCard item={item} />
+                <ProductsCard
+                  item={item}
+                  onClick={() => {
+                    handleAddtoCart(item);
+                  }}
+                  isViewDetail={false}
+                />
               </div>
             ))}
           </div>

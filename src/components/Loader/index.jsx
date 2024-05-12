@@ -1,5 +1,5 @@
 import React from "react";
-import LoaderImg from "../../assets/svg/loader.gif";
+import LoaderImg from "../../assets/image/grazleLogo.png";
 import "./index.css";
 
 const Loader = ({ isLoader }) => {

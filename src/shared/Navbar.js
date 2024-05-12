@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useContext, useEffect, useRef, useState } from "react";
 import logo from "../assets/img/Grazle-Logo.png";
 import image1 from "../assets/images/team/ad-thumb.png";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,15 +19,22 @@ import DropDownMenu from "../components/dropdownMenu";
 import { useAuth } from "../context/AuthProvider";
 const Navbar = () => {
   const { isLogin } = useAuth();
+  const offcanvasRef = useRef(null);
   const GlobelState = useContext(CartContext);
   const badge = GlobelState.state.length;
+
+  const closeOffcanvas = () => {
+    if (offcanvasRef.current) {
+      offcanvasRef.current.classList.remove("show");
+    }
+  };
   return (
     <div>
       <div className="header_middle home3_style pt20 pb20 dn-992">
         <div className="container ">
           <div className="d-xl-none d-block">
-            <div className="d-flex justify-content-between">
-              <div className="d-flex align-item-start">
+            <div className="d-flex justify-content-between align-items-end">
+              <div className="d-flex align-items-end">
                 <span
                   className=""
                   type="button"
@@ -40,11 +48,67 @@ const Navbar = () => {
               </div>
               <div className="navigation d-flex flex-row gap-2 align-items-center">
                 <Link to="/cart" style={{ color: "black" }}>
-                  <img src={Cart} alt="cart" />
+                  <div className="d-flex align-items-center">
+                    <div className="icon me-2  position-relative">
+                      <img src={Cart} alt="cart" />
+                      <span className="position-absolute mt-2 top-0 start-100 translate-middle badge rounded-pill bg-danger text-white">
+                        {badge}
+                      </span>
+                    </div>
+
+                    <div className="details">
+                      <h5 className="title">Cart</h5>
+                    </div>
+                  </div>
                 </Link>
                 <Link to="/favourite" style={{ color: "black" }}>
                   <img src={Heart} alt="Heart" />
                 </Link>
+                {isLogin ? (
+                  <div className="d-flex align-items-center dropdown">
+                    <a
+                      style={{ textDecoration: "none" }}
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      className="header_iconbox_home3_style cart-filter-btn"
+                    >
+                      <img
+                        src={image1}
+                        alt=""
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          borderRadius: "50%",
+                          outline: "1px solid red",
+                        }}
+                      />
+                    </a>
+                    <ul
+                      class="dropdown-menu dropdown-menu-end mt-3 border-0 shadow p-1"
+                      aria-labelledby="dropdownMenuLink"
+                      style={{ width: "250px", borderRadius: "10px" }}
+                    >
+                      <DropDownMenu label="Your Account" link="/user" />
+                      <DropDownMenu label="Favourites" link="/favourite" />
+                      <DropDownMenu label="Manage Addresses" link="/address" />
+                      <DropDownMenu label="Credit Limit" link="/credit" />
+                      <DropDownMenu label="Grazzle Membership" link="/plans" />
+                      <DropDownMenu label="Notification Settings" />
+                      <p className="m-0 p-2">Grazle</p>
+                      <DropDownMenu label="FAQs" />
+                      <DropDownMenu
+                        label="Terms of Use"
+                        link="/termscondition"
+                      />
+                      <DropDownMenu label="Privacy Policy" />
+                    </ul>
+                  </div>
+                ) : (
+                  <Link to={"/login"}>Login</Link>
+                )}
               </div>
             </div>
           </div>
@@ -228,7 +292,10 @@ const Navbar = () => {
         className="offcanvas offcanvas-start"
         tabIndex="-1"
         id="offcanvasExample"
+        data-bs-scroll="true"
+        data-bs-backdrop="false"
         aria-labelledby="offcanvasExampleLabel"
+        ref={offcanvasRef}
       >
         <div className="offcanvas-header ">
           <h5 className="offcanvas-title w-100" id="offcanvasExampleLabel">
@@ -239,22 +306,31 @@ const Navbar = () => {
             className="btn-close "
             data-bs-dismiss="offcanvas"
             aria-label="Close"
+            onClick={closeOffcanvas}
           ></button>
         </div>
         <hr />
         <div className="offcanvas-body">
           <ul className="list-unstyled  flex-column">
             <li className="links">
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" onClick={closeOffcanvas}>
+                Home
+              </NavLink>
             </li>
             <li className="links">
-              <NavLink to="/product">Offer</NavLink>
+              <NavLink to="/product" onClick={closeOffcanvas}>
+                Offer
+              </NavLink>
             </li>
             <li className="links">
-              <NavLink to="/error">Categories</NavLink>
+              <NavLink to="/error" onClick={closeOffcanvas}>
+                Categories
+              </NavLink>
             </li>
             <li className="links">
-              <NavLink to="/favourite">Favourite</NavLink>
+              <NavLink to="/favourite" onClick={closeOffcanvas}>
+                Favourite
+              </NavLink>
             </li>
           </ul>
         </div>

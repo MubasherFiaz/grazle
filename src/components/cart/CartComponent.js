@@ -149,7 +149,9 @@ const CartComponent = () => {
                               style={{ width: "100px", height: "100px" }}
                             />
                             <div className="customcart">
-                              <h4>{item.name}</h4>
+                              <div style={{ maxWidth: "70ch" }}>
+                                <h4 className="text-ellipsis">{item.name}</h4>
+                              </div>
                               <p>
                                 <span
                                   className="badge badge-danger badge-soft me-2"
@@ -203,8 +205,8 @@ const CartComponent = () => {
                                 </button>
                               </div>
                             </div>
-                            <div className="icon-div icondiv float-end me-md-4 me-1 mt-md-4">
-                              <i className="fa-solid fa-pen-to-square edit me-3"></i>
+                            <div className="d-flex justify-content-evenly mt-5">
+                              <i className="fa-solid fa-pen-to-square edit"></i>
                               <i
                                 className="fa-solid fa-trash-can del cursor-pointer"
                                 onClick={() => {

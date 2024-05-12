@@ -15,21 +15,6 @@ import ProductsCard from "../productsCard";
 import { CartContext } from "../../context/Context";
 
 const HomeCategory2 = ({ data }) => {
-  const GlobelState = useContext(CartContext);
-  const dispatch = GlobelState.dispatch;
-  const colors = {
-    0: "#BC5A3D",
-    1: "#FE9800",
-    2: "#6B6A56",
-    3: "#4FAD2E",
-  };
-  const bgColors = {
-    0: "#f3dfd9",
-    1: "#fbeccc",
-    2: "#e3e2dd",
-    3: "#d2ecda",
-  };
-  const firstThree = data?.slice(0, 3);
   const firstFive = data?.slice(0, 5);
 
   return (
@@ -69,46 +54,6 @@ const HomeCategory2 = ({ data }) => {
                 </Carousel>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="clothing-product pt0">
-        <div className="container  p-4 bgc-white bdrs6 position-relative">
-          <div className="row ">
-            {firstThree?.map((item, index) => (
-              <div className="col-lg-4 col-sm-12 mb-3" key={index}>
-                <div
-                  className="banner_one home1_style color2 home4_style h450"
-                  style={{ backgroundColor: bgColors[index] }}
-                >
-                  <div className="thumb">
-                    <img
-                      className="float-end"
-                      src={item.image}
-                      alt="smartwatch"
-                      style={{ mixBlendMode: "darken" }}
-                    />
-                  </div>
-                  <div className="details">
-                    <h3 className="title" style={{ color: colors[index] }}>
-                      {item.name}
-                    </h3>
-
-                    <Link
-                      to="#"
-                      className="shop_btn"
-                      style={{
-                        color: item.bcolor,
-                        textDecoration: "none",
-                      }}
-                    >
-                      Shop Now
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

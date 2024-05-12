@@ -9,8 +9,8 @@ const MainLayout = () => {
   const { isLoading } = useAuth();
   return (
     <>
-      <Navbar />
       <Loader isLoader={isLoading} />
+      <Navbar />
       <Outlet />
       <Footer />
     </>

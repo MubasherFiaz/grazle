@@ -13,6 +13,7 @@ const Address = () => {
 
   const GlobelState = useContext(CartContext);
   const state = GlobelState.state;
+  const dispatch = GlobelState.dispatch;
 
   const idsString = state.map((product) => product.id).join(",");
   const quantity = state.map((product) => product.quantity).join(",");
@@ -57,7 +58,14 @@ const Address = () => {
         formData
       );
       setIsLoading(false);
-      toast.success(response.data.message);
+      if (response.data.error) {
+        toast.error(response.data.message);
+      } else {
+        toast.success(response.data.message);
+        dispatch({
+          type: "RESET",
+        });
+      }
       return response.data;
     } catch (error) {
       setIsLoading(false);
@@ -107,7 +115,7 @@ const Address = () => {
 
           <div className="d-flex my-4 customtbtn">
             <h3>
-              <Link to={"/shippingaddress"}>
+              <Link to={"/address"}>
                 <i className="fa-regular fa-square-plus ms-3 me-2"></i>
                 Add New Delivery Address
               </Link>
