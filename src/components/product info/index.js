@@ -58,11 +58,24 @@ const ProductInfo = () => {
           <img src={productDetail?.product_image} alt="Product Image" />
         </div>
         <div className="mb-xl-5 mb-3">
+          <h3 className="fs-4 fw-bold mb-2">
+            {productDetail?.title.toUpperCase()}
+          </h3>
           <div
+            className="tableStyle"
             dangerouslySetInnerHTML={{
               __html: productDetail?.product?.description,
             }}
           />
+          <button
+            className="cardButton btn btn-light-green"
+            style={{ widows: "150px" }}
+          >
+            <span class="cart-text">Add to Cart</span>
+            <span class="cart-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </span>
+          </button>
         </div>
         <div className="review-wrapper">
           <div className="review-head">
@@ -428,7 +441,6 @@ const ProductInfo = () => {
                   onClick={() => {
                     handleAddtoCart(item);
                   }}
-                  isViewDetail={false}
                 />
               </div>
             ))}

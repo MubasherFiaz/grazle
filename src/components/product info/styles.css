@@ -1,7 +1,14 @@
 .main-product-image {
   height: 400px;
+  max-width: 400px;
   width: 100%;
+  margin: 0 auto;
   background: #d9d9d91a;
+}
+.main-product-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 .product-tabpane .nav-link {
   font-size: 16px;
@@ -180,4 +187,37 @@
   line-height: 24px;
   color: #74767e;
   text-transform: capitalize;
+}
+.tableStyle {
+  width: 100%;
+  margin: 0 auto; /* Center the table horizontally */
+  border-collapse: collapse; /* Collapse table borders into a single border */
+}
+.tableStyle table {
+  width: 100% !important;
+  border-radius: 10px;
+}
+
+.tableStyle th,
+.tableStyle td {
+  padding: 8px; /* Add padding inside table cells */
+  border: 1px solid #ddd; /* Add border around table cells */
+}
+
+.tableStyle th {
+  background-color: #f2f2f2; /* Light gray background color for table header cells */
+}
+
+/* Change color of odd rows */
+.tableStyle tbody tr:nth-child(odd) {
+  background-color: #d9d9d91a;
+}
+
+/* Change color of even rows */
+.tableStyle tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.tableStyle td:first-child {
+  font-weight: bold;
 }
