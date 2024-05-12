@@ -1,0 +1,12 @@
+.modal-body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.modal-content {
+  border-radius: 30px;
+  min-height: 300px;
+}
+.modal-backdrop {
+  display: block !important;
+}

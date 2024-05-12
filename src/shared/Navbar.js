@@ -17,6 +17,10 @@ import Menu from "../assets/image/hamburger.png";
 import { CartContext } from "../context/Context";
 import DropDownMenu from "../components/dropdownMenu";
 import { useAuth } from "../context/AuthProvider";
+import Modal from "../components/modals/genericModal";
+import LogoutModal from "../components/modals/logoutModal";
+import OrderplaceModal from "../components/modals/orderPlaceModal";
+import CancelorderModal from "../components/modals/cancelOrderModal";
 const Navbar = () => {
   const { isLogin } = useAuth();
   const offcanvasRef = useRef(null);
@@ -28,8 +32,17 @@ const Navbar = () => {
       offcanvasRef.current.classList.remove("show");
     }
   };
+  const [showModal, setShowModal] = useState(false);
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
   return (
     <div>
+      <button onClick={() => setShowModal(true)}>Open Modal</button>
+      {/* <LogoutModal show={showModal} onHide={handleModalClose} /> */}
+      {/* <OrderplaceModal show={showModal} onHide={handleModalClose} /> */}
+      <CancelorderModal show={showModal} onHide={handleModalClose} />
       <div className="header_middle home3_style pt20 pb20 dn-992">
         <div className="container ">
           <div className="d-xl-none d-block">
