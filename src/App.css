@@ -119,3 +119,15 @@ a {
     font-size: 12px !important;
   }
 }
+/* CartItemComponent */
+
+@media screen and (max-width: 1024px) {
+  .CartItemTitle {
+    max-width: 30ch;
+  }
+}
+@media screen and (max-width: 992px) {
+  .CartItemTitle {
+    max-width: 40ch;
+  }
+}

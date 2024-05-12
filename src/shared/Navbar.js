@@ -48,17 +48,11 @@ const Navbar = () => {
               </div>
               <div className="navigation d-flex flex-row gap-2 align-items-center">
                 <Link to="/cart" style={{ color: "black" }}>
-                  <div className="d-flex align-items-center">
-                    <div className="icon me-2  position-relative">
-                      <img src={Cart} alt="cart" />
-                      <span className="position-absolute mt-2 top-0 start-100 translate-middle badge rounded-pill bg-danger text-white">
-                        {badge}
-                      </span>
-                    </div>
-
-                    <div className="details">
-                      <h5 className="title">Cart</h5>
-                    </div>
+                  <div className="icon me-2  position-relative">
+                    <img src={Cart} alt="cart" />
+                    <span className="position-absolute mt-2 top-0 start-100 translate-middle badge rounded-pill bg-danger text-white">
+                      {badge}
+                    </span>
                   </div>
                 </Link>
                 <Link to="/favourite" style={{ color: "black" }}>

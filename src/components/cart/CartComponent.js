@@ -149,7 +149,7 @@ const CartComponent = () => {
                               style={{ width: "100px", height: "100px" }}
                             />
                             <div className="customcart">
-                              <div style={{ maxWidth: "70ch" }}>
+                              <div className="CartItemTitle">
                                 <h4 className="text-ellipsis">{item.name}</h4>
                               </div>
                               <p>
