@@ -36,7 +36,8 @@ const ProductInfo = () => {
       await geProductDetailData();
     };
     fetchData();
-  }, []);
+    window.scrollTo(0, 0);
+  }, [productId]);
 
   const handleAddtoCart = (item) => {
     if (isLogin) {

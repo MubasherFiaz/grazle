@@ -29,6 +29,7 @@ function App() {
     } else {
       setIsLogin(false);
     }
+    console.log("APP");
   }, []);
 
   return (

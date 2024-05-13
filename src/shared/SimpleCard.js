@@ -1,35 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import StarRating from "./StarRating";
 
 const SimpleCard = ({ item }) => {
+  const navigate = useNavigate();
   return (
-    // <div className="card ">
-    //   <div className="shop_item home7_style small_style bdrtrb1 px-2 px-sm-3  ">
-    //     <div className="thumb pb30 ">
-    //       <img src={item.image} alt="Recent Products" />
-    //     </div>
-    //     <div className="details">
-    //       <div className="title ">{item.product}</div>
-    //       <div className="title">
-    //         <Link to="#" style={{ color: "#F70000", textDecoration: "none" }}>
-    //           {item.deal}
-    //         </Link>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
     <div className="best-productCard">
       <div className="best-productCard-Header">
         <div className="cardImage">
-          <img src={item?.image} alt="Best" />
+          <img
+            src={item?.image}
+            alt="Best"
+            style={{ width: "240px", height: "210px" }}
+          />
         </div>
       </div>
-      <div className="best-productCard-Body">
-        <div className="title ">
-          <h3>{item?.name}</h3>
+      <div className="best-productCard-Body cardBody">
+        <div className="productName title">
+          <h3
+            onClick={() => {
+              navigate(`/product-info/${item?.id}`);
+            }}
+            className="cursor-pointer"
+          >
+            {item?.name}
+          </h3>
         </div>
         <div className="desc">
-          <Link to="#">{item.deal || "Special Deal"}</Link>
+          <StarRating noOfRating={item?.no_of_ratings} />
         </div>
       </div>
     </div>

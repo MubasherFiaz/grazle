@@ -31,12 +31,16 @@ const HomePage = () => {
     };
     fetchData();
   }, []);
+
+  const randomNumber = Math.floor(Math.random() * homeData?.sections?.length);
+
+  console.log("homeData?.sections", homeData?.sections, randomNumber);
   return (
     <>
       <HomeTop data={homeData?.sliders} />
       <HomeCategory data={homeData?.categories} />
       <HomeProduct data={homeData?.sections} />
-      <HomeCategory2 data={homeData?.categories} />
+      <HomeCategory2 data={homeData?.sections[randomNumber]?.product_details} />
     </>
   );
 };

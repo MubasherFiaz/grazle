@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import userimg from "../../assets/image/Ellipse 3037.png";
 import UserSiderBAr from "../../shared/UserSiderBAr";
 import ToggleSideBar from "../../shared/ToggleSideBar";
@@ -6,9 +6,12 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import Input from "../input/input";
 import { useAuth } from "../../context/AuthProvider";
+import { globalApi } from "../../apis/AuthApis";
+import { toast } from "react-toastify";
 
 const UserDetail = () => {
-  const { userData } = useAuth();
+  const { userData, setIsLoading } = useAuth();
+  const [imageURL, setImageURL] = useState(null);
 
   console.log(userData, "UserDetail");
 
@@ -20,7 +23,44 @@ const UserDetail = () => {
     email: Yup.string().email("Invalid email address").required("Required"),
   });
 
-  console.log(userData.image);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageURL(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const UpdateUserData = async (values) => {
+    const formData = new FormData();
+    formData.append("user_id", userData.id);
+    formData.append("email", values.email);
+    formData.append("username", values.username);
+    formData.append("profile_img", imageURL);
+
+    try {
+      setIsLoading(true);
+      const response = await globalApi(
+        "https://aquaconcepts78.fr/grazleBackend/api/update_user",
+        "POST",
+        formData
+      );
+      setIsLoading(false);
+      if (response?.error) {
+        toast.error(response.message);
+      } else {
+        toast.success(response.message);
+      }
+      console.log(response, "Response");
+      return response;
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error);
+      throw error;
+    }
+  };
 
   return (
     <div>
@@ -48,10 +88,20 @@ const UserDetail = () => {
                   <div class="account_user_deails pl40 pl0-md">
                     <div class="d-flex customer_info">
                       <div class="flex-shrink-0 posr">
+                        <input
+                          id="fileInput"
+                          type="file"
+                          style={{ display: "none" }}
+                          onChange={(e) => handleImageChange(e)}
+                        />
                         <img
-                          src={userData?.image}
+                          src={imageURL || userData?.image}
                           alt="customer1.png"
                           class="profile-img"
+                          style={{ width: "135px", height: "135px" }}
+                          onClick={() =>
+                            document.getElementById("fileInput").click()
+                          }
                         />
                         <span class="active_status active"></span>
                       </div>
@@ -68,8 +118,8 @@ const UserDetail = () => {
                             <Formik
                               initialValues={userData}
                               validationSchema={validationSchema}
-                              onSubmit={() => {
-                                console.log("Submi");
+                              onSubmit={(values) => {
+                                UpdateUserData(values);
                               }}
                             >
                               {({

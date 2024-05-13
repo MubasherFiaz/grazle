@@ -22,10 +22,21 @@ import LogoutModal from "../components/modals/logoutModal";
 import OrderplaceModal from "../components/modals/orderPlaceModal";
 import CancelorderModal from "../components/modals/cancelOrderModal";
 const Navbar = () => {
-  const { isLogin } = useAuth();
+  const { isLogin, setIsLogin, setUserData, userData } = useAuth();
   const offcanvasRef = useRef(null);
   const GlobelState = useContext(CartContext);
   const badge = GlobelState.state.length;
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("login_token"));
+    setUserData(storedData?.data[0]);
+
+    if (storedData?.data) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
 
   const closeOffcanvas = () => {
     if (offcanvasRef.current) {
@@ -215,10 +226,6 @@ const Navbar = () => {
                                 {badge}
                               </span>
                             </div>
-
-                            <div className="details">
-                              <h5 className="title">Cart</h5>
-                            </div>
                           </div>
                         </Link>
                       </p>
@@ -229,10 +236,6 @@ const Navbar = () => {
                               <img src={Heart} alt="Heart" />
                             </div>
                           </Link>
-
-                          <div className="details">
-                            <h5 className="title">Favorite</h5>
-                          </div>
                         </div>
                       </p>
                     </div>
@@ -248,7 +251,7 @@ const Navbar = () => {
                           className="header_iconbox_home3_style cart-filter-btn"
                         >
                           <img
-                            src={image1}
+                            src={userData?.image}
                             alt=""
                             style={{
                               width: "40px",

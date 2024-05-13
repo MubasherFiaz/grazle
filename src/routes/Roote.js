@@ -51,7 +51,7 @@ const Roote = () => {
       setisLoggedIn(false);
     }
   }
-  const { setIsLogin, setUserData } = useAuth();
+  const { setIsLogin, setUserData, isLogin } = useAuth();
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("login_token"));
     setUserData(storedData?.data[0]);
@@ -61,79 +61,70 @@ const Roote = () => {
     } else {
       setIsLogin(false);
     }
+    console.log("Roote");
   }, []);
 
   useEffect(() => {
     set_login_status();
   }, []);
-  // const logIn = () => {
-  //   navigate("/index");
-  // };
-  // const logOut = () => {
-  //   setisLoggedIn(false);
-  //   localStorage.removeItem("login_token");
-  //   navigate("/");
-  // };
-  return (
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/productdetail" element={<ProductDetail />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/faq" element={<FaqComponent />} />
-        <Route path="/review" element={<Review />} />
-        <Route path="/success" element={<ConfirmOrder />} />
-        <Route path="/orderconfirm" element={<Confirm />} />
-        <Route path="/ordercompleted" element={<CompleteOrder />} />
-        <Route path="/shippingaddress" element={<ShippingAddress />} />
-        <Route path="/trackorder" element={<TrackOrder />} />
-        <Route path="/getintouch" element={<GetTouch />} />
-        <Route path="/payment" element={<PaymentMethod />} />
-        <Route path="/orderhistory" element={<OrderHistory />} />
-        <Route path="/alladdress" element={<Address />} />
-        <Route path="/order1" element={<Order />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/termscondition" element={<TermsCondition />} />
-        <Route path="/product-info/:productId" element={<ProductInfo />} />
-        <Route path="/plans" element={<Plans />} />
-        <Route path="/credit" element={<Credit />} />
-        {/* <Route
+  if (isLogin) {
+    return (
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/productdetail" element={<ProductDetail />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/faq" element={<FaqComponent />} />
+          <Route path="/review" element={<Review />} />
+          <Route path="/success" element={<ConfirmOrder />} />
+          <Route path="/orderconfirm" element={<Confirm />} />
+          <Route path="/ordercompleted" element={<CompleteOrder />} />
+          <Route path="/shippingaddress" element={<ShippingAddress />} />
+          <Route path="/trackorder" element={<TrackOrder />} />
+          <Route path="/getintouch" element={<GetTouch />} />
+          <Route path="/payment" element={<PaymentMethod />} />
+          <Route path="/orderhistory" element={<OrderHistory />} />
+          <Route path="/alladdress" element={<Address />} />
+          <Route path="/order1" element={<Order />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/termscondition" element={<TermsCondition />} />
+          <Route path="/product-info/:productId" element={<ProductInfo />} />
           <Route path="/plans" element={<Plans />} />
           <Route path="/credit" element={<Credit />} />
-          <Route
-            exact
-            path="/user"
-            element={
-              <Protected isLoggedIn={login_info}>
-                <User />
-              </Protected>
-            }
-          /> */}
-        <Route path="/user" element={<User />} />
-        <Route path="/password" element={<PasswordManager />} />
-        <Route path="/address" element={<ManageAddress />} />
-        <Route path="/favourite" element={<Favourite />} />
-        <Route path="/order" element={<MyOrder />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Route>
-      <Route element={<AuthLayout />}>
-        <Route
-          exact
-          path="/login"
-          element={
-            // <LoginRedirect isLoggedIn={login_info}>
-            <Login />
-            // </LoginRedirect>
-          }
-        />
-        {/* <Route path="/login" element={<Login />} /> */}
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/sellerform" element={<SellerForm />} />
-      </Route>
-    </Routes>
-  );
+          <Route path="/user" element={<User />} />
+          <Route path="/password" element={<PasswordManager />} />
+          <Route path="/address" element={<ManageAddress />} />
+          <Route path="/favourite" element={<Favourite />} />
+          <Route path="/order" element={<MyOrder />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+      </Routes>
+    );
+  } else {
+    return (
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/productdetail" element={<ProductDetail />} />
+
+          <Route path="/faq" element={<FaqComponent />} />
+
+          <Route path="/termscondition" element={<TermsCondition />} />
+          <Route path="/product-info/:productId" element={<ProductInfo />} />
+
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+        <Route element={<AuthLayout />}>
+          <Route exact path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/sellerform" element={<SellerForm />} />
+        </Route>
+      </Routes>
+    );
+  }
 };
 
 export default Roote;
