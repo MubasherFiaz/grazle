@@ -25,18 +25,40 @@ const AllProduct = () => {
   };
 
   const [allProductsData, setAllProductsData] = useState(null);
+  const [category, setCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const { setIsLoading, isLogin } = useAuth();
+  const [filterCheckBox, setfilterCheckBox] = useState(null);
 
-  const getProductsData = async (page) => {
+  const getProductsData = async () => {
+    const formData = new FormData();
+    formData.append("per-page", 12);
+    formData.append("sort", filterCheckBox);
+    formData.append("page", currentPage);
     try {
       setIsLoading(true);
       const data = await globalApi(
-        `https://aquaconcepts78.fr/grazleBackend/api/products?page=${page}`
+        `https://aquaconcepts78.fr/grazleBackend/api/products`,
+        "GET",
+        formData
       );
       setAllProductsData(data.data);
       setTotalPages(Math.ceil(data.data.products.total / 12));
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error:", error);
+      setIsLoading(false);
+    }
+  };
+
+  const getCategoryData = async () => {
+    try {
+      setIsLoading(true);
+      const data = await globalApi(
+        "https://aquaconcepts78.fr/grazleBackend/api/home"
+      );
+      setCategory(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -49,7 +71,14 @@ const AllProduct = () => {
       await getProductsData(currentPage);
     };
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, filterCheckBox]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getCategoryData();
+    };
+    fetchData();
+  }, []);
 
   const handleAddtoCart = (item) => {
     if (isLogin) {
@@ -167,7 +196,10 @@ const AllProduct = () => {
           <div className="container ">
             <div className="row">
               <div className=" col-xl-3 d-none d-xl-block">
-                <ProductFilter />
+                <ProductFilter
+                  data={category?.categories}
+                  setfilterCheckBox={setfilterCheckBox}
+                />
               </div>
               <div className="col-lg-12 col-xl-9">
                 <div

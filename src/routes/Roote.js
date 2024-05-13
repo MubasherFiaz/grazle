@@ -89,7 +89,7 @@ const Roote = () => {
           <Route path="/order1" element={<Order />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/termscondition" element={<TermsCondition />} />
-          <Route path="/product-info/:productId" element={<ProductInfo />} />
+          <Route path="/product-info/:productName" element={<ProductInfo />} />
           <Route path="/plans" element={<Plans />} />
           <Route path="/credit" element={<Credit />} />
           <Route path="/user" element={<User />} />
@@ -113,7 +113,7 @@ const Roote = () => {
           <Route path="/faq" element={<FaqComponent />} />
 
           <Route path="/termscondition" element={<TermsCondition />} />
-          <Route path="/product-info/:productId" element={<ProductInfo />} />
+          <Route path="/product-info/:productName" element={<ProductInfo />} />
 
           <Route path="*" element={<ErrorPage />} />
         </Route>

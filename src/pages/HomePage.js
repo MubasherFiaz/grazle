@@ -34,7 +34,6 @@ const HomePage = () => {
 
   const randomNumber = Math.floor(Math.random() * homeData?.sections?.length);
 
-  console.log("homeData?.sections", homeData?.sections, randomNumber);
   return (
     <>
       <HomeTop data={homeData?.sliders} />

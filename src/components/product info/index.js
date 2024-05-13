@@ -5,12 +5,12 @@ import StarRating from "../../shared/StarRating";
 import { useAuth } from "../../context/AuthProvider";
 import { globalApi } from "../../apis/AuthApis";
 import ProductsCard from "../productsCard";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { CartContext } from "../../context/Context";
 
 const ProductInfo = () => {
-  const { productId } = useParams();
+  const { productName } = useParams();
   const [productDetail, setProductDetail] = useState(null);
   const { setIsLoading, isLogin } = useAuth();
 
@@ -20,10 +20,11 @@ const ProductInfo = () => {
   const geProductDetailData = async () => {
     try {
       setIsLoading(true);
-      const data = await globalApi(
-        `https://aquaconcepts78.fr/grazleBackend/api/product_details_by_id/${productId}`
+      const response = await globalApi(
+        `https://aquaconcepts78.fr/grazleBackend/api/product_details/${productName}`
       );
-      setProductDetail(data.data);
+      setProductDetail(response.data);
+      console.log(response.data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -37,7 +38,7 @@ const ProductInfo = () => {
     };
     fetchData();
     window.scrollTo(0, 0);
-  }, [productId]);
+  }, [productName]);
 
   const handleAddtoCart = (item) => {
     if (isLogin) {
@@ -55,13 +56,277 @@ const ProductInfo = () => {
   return (
     <section id="product-info">
       <div className="container">
-        <div className="main-product-image mb-5 d-flex justify-content-center align-items-center">
+        {/* <div className="main-product-image mb-5 d-flex justify-content-center align-items-center">
           <img src={productDetail?.product_image} alt="Product Image" />
+        </div> */}
+        <div className="row">
+          <div className="col-xl-6 col-xxl-7">
+            <div className="shop_single_natabmenu">
+              <div className="d-block">
+                <div className="tab-content" id="v-pills-tabContent">
+                  <div
+                    className="tab-pane fade"
+                    id="v-pills-home"
+                    role="tabpanel"
+                    aria-labelledby="v-pills-home-tab"
+                  >
+                    <div className="shop_single_navmenu_content mb-3 text-center">
+                      <Link
+                        className="product_popup popup-img"
+                        to="#"
+                        style={{ color: "black", textDecoration: "none" }}
+                      >
+                        <span className="flaticon-full-screen"></span>
+                      </Link>
+                      <div className="zoomimg_wrapper">
+                        <img
+                          className="zoom-img"
+                          id="zoom_01"
+                          src={productDetail?.product_image}
+                          data-zoom-image="img/Product Image.png"
+                          width="550"
+                          alt="Shop Single Image"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="v-pills-profile"
+                    role="tabpanel"
+                    aria-labelledby="v-pills-profile-tab"
+                  >
+                    <div className="shop_single_navmenu_content mb-3 text-center">
+                      <Link
+                        className="product_popup popup-img"
+                        to="#"
+                        style={{ color: "black", textDecoration: "none" }}
+                      >
+                        <span className="flaticon-full-screen"></span>
+                      </Link>
+                      <div className="zoomimg_wrapper">
+                        <img
+                          className="zoom-img"
+                          id="zoom_02"
+                          src={productDetail?.product_image}
+                          data-zoom-image="img/Product Image.png"
+                          width="550"
+                          alt="Shop Single Image"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="tab-pane fade show active"
+                    id="v-pills-messages"
+                    role="tabpanel"
+                    aria-labelledby="v-pills-messages-tab"
+                  >
+                    <div className="shop_single_navmenu_content mb-3 text-center">
+                      <Link
+                        className="product_popup popup-img"
+                        to="#"
+                        style={{ color: "black", textDecoration: "none" }}
+                      >
+                        <span className="flaticon-full-screen"></span>
+                      </Link>
+                      <div className="zoomimg_wrapper">
+                        <img
+                          className="zoom-img"
+                          id="zoom_03"
+                          src={productDetail?.product_image}
+                          data-zoom-image="img/Product Image.png"
+                          width="550"
+                          alt="Shop Single Image"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="nav d-flex nav-pills me-3 mb-3"
+                  id="v-pills-tab2"
+                  role="tablist"
+                  aria-orientation="vertical"
+                >
+                  <button
+                    className="nav-link mb-0 me-3"
+                    id="v-pills-home-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-home"
+                    type="button"
+                    role="tab"
+                    aria-controls="v-pills-home"
+                    aria-selected="true"
+                  >
+                    <img src={productDetail?.product_image} alt="" />
+                  </button>
+                  <button
+                    className="nav-link mb-0 me-3"
+                    id="v-pills-profile-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-profile"
+                    type="button"
+                    role="tab"
+                    aria-controls="v-pills-profile"
+                    aria-selected="false"
+                  >
+                    <img src={productDetail?.product_image} alt="" />
+                  </button>
+                  <button
+                    className="nav-link mb-0 active"
+                    id="v-pills-messages-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-messages"
+                    type="button"
+                    role="tab"
+                    aria-controls="v-pills-messages"
+                    aria-selected="false"
+                  >
+                    <img src={productDetail?.product_image} alt="" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-xl-6 col-xxl-5">
+            <div className="shop_single_product_details ps-0 ps-xl-4 mt-4 mt-xl-0">
+              <h3 className="fs-4 fw-bold mb-2">
+                {productDetail?.title.toUpperCase()}
+              </h3>
+              <ul className="d-flex mediaul">
+                <li className="me-3">
+                  <div className="sspd_review">
+                    <StarRating />
+                  </div>
+                </li>
+                <li>3,014 reviews</li>
+              </ul>
+              <div className="sspd_price mb0 mt15 ctext14">
+                ₹ {productDetail?.product?.min_max_price?.max_special_price}
+              </div>
+              <div className="sspd_price mb17 mt2 ctext14">
+                <small>
+                  <del className="mr10">
+                    ₹{productDetail?.product?.min_max_price?.max_price}
+                  </del>
+                </small>
+                <small className="text-success fw-bold">
+                  {
+                    productDetail?.product?.min_max_price
+                      ?.discount_in_percentage
+                  }
+                  % off
+                </small>
+              </div>
+              <hr />
+
+              <div className="shop_single_table style3 table-responsive">
+                <div className="shop_single_description ">
+                  <h4 className="ctext14">Variants</h4>
+                </div>
+              </div>
+              <div className="mb-4 d-flex justify-content-between align-items-center mt-3">
+                <ul className="cart_btn_widget shop_single2_style align-items-center mb-0 mediaul  ">
+                  <li className="list-inline-item me-2  ">
+                    <Link
+                      to="#"
+                      className="small-medium-text"
+                      style={{
+                        border: "2px solid #F70000",
+                        backgroundColor: "#fcf2f2",
+                        color: "#F70000",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Small
+                    </Link>
+                  </li>
+                  <li className="list-inline-item me-2  ">
+                    <Link
+                      to="#"
+                      className="small-medium-text"
+                      style={{
+                        background: "none",
+                        color: "#909198",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Medium
+                    </Link>
+                  </li>
+                  <li className="list-inline-item me-2  ">
+                    <Link
+                      to="#"
+                      className="small-medium-text"
+                      style={{
+                        backgroundColor: "#F8F8F8",
+                        color: "#000000",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Large
+                    </Link>
+                  </li>
+                </ul>
+                <div className="cart_btn home_page_sidebar d-grid">
+                  <div className="quantity-block home_page_sidebar border">
+                    <button className="quantity-arrow-minus2 shop_single_page_sidebar">
+                      <i className="fa-solid fa-minus"></i>
+                    </button>
+                    <input
+                      className="quantity-num2 shop_single_page_sidebar"
+                      type="number"
+                      value="3"
+                    />
+                    <button className="quantity-arrow-plus2 shop_single_page_sidebar">
+                      {" "}
+                      <i className="fa-solid fa-plus"></i>{" "}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-4 d-flex justify-content-between align-items-center">
+                <Link
+                  to="#"
+                  className="btn   bdrs60  add-cart-btn btnwhite"
+                  style={{ backgroundColor: "#F70000", color: "#fff" }}
+                >
+                  Add to cart
+                </Link>
+                <Link
+                  to="#"
+                  className="btn   bdrs60 add-cart-btn btnred"
+                  style={{ backgroundColor: "#fcf2f2", color: "#F70000" }}
+                >
+                  Get Started
+                </Link>
+                <Link
+                  to="#"
+                  className="btnchange"
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    background: "#F8F8F8",
+                    borderRadius: "50%",
+                    padding: "13px",
+                    color: "#F70000",
+                    textDecoration: "none",
+                  }}
+                >
+                  <span
+                    className="flaticon-heart fz16 heading-color"
+                    style={{ color: "#F70000", fontSize: "24px" }}
+                  ></span>
+                </Link>
+              </div>
+
+              <hr className="mt-0 mb20" />
+            </div>
+          </div>
         </div>
         <div className="mb-xl-5 mb-3">
-          <h3 className="fs-4 fw-bold mb-2">
-            {productDetail?.title.toUpperCase()}
-          </h3>
           <div
             className="tableStyle"
             dangerouslySetInnerHTML={{

@@ -68,7 +68,7 @@ const ProductsCard = ({ item, onClick }) => {
         <div className="productName">
           <h3
             onClick={() => {
-              navigate(`/product-info/${item?.id}`);
+              navigate(`/product-info/${item?.slug}`);
             }}
             className="cursor-pointer"
           >

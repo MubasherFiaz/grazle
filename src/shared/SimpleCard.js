@@ -19,7 +19,7 @@ const SimpleCard = ({ item }) => {
         <div className="productName title">
           <h3
             onClick={() => {
-              navigate(`/product-info/${item?.id}`);
+              navigate(`/product-info/${item?.slug}`);
             }}
             className="cursor-pointer"
           >
